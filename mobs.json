@@ -88,5 +88,26 @@
     "conditions": ["Spawnt nur in Nether-Festungen"],
     "note": "Wither Skeletons erscheinen in Nether-Festungen und sind die Quelle für Wither-Schädel.",
     "image": "images/Wither_Skeleton.png"
+  },
+  {
+    "name": "Chicken Jockey",
+    "image": "images/Chicken_Jockey_with_Carved_Pumpkin.png",
+    "spawnBiome": ["Any Overworld night"],
+    "spawnChance": "≈ 0.25 % (ohne Huhn), ≈ 0.4875 % (bei Hühnern)",
+    "note": "Jeder Baby‑Zombie hat 5 % Chance, ein Huhn in ca. 10×6×10 zu suchen; wenn keiner da, weitere 5 % Chance → ergibt ca. 0.25 %, bis 0.4875 % mit Hühnern vorhanden." :contentReference[oaicite:1]{index=1}
+  },
+  {
+    "name": "Drowned",
+    "image": "images/Drowned.png",
+    "spawnBiome": ["Ocean (Java auf Y<58)","River","Dripstone Caves"],
+    "spawnChance": "Simon unter dem Monster‑Cap; häufig im Wasser bei Lichtlevel ≤ 0",
+    "note": "Spawnen bei Lichtlevel 0 in Ozeanen und Flüssen; ca. 5 % tragen Trident (Java), 15 % Trident (Bedrock)." :contentReference[oaicite:2]{index=2}
+  },
+  {
+    "name": "Wither Skeleton",
+    "image": "images/Wither_Skeleton.png",
+    "spawnBiome": ["Nether Fortress"],
+    "spawnChance": "≈ 80 % aller Skelett‑Spawns in Nether‑Festungen",
+    "note": "Within Nether fortress skeleton spawners spawn 80 % of the time Wither Skeletons." :contentReference[oaicite:3]{index=3}
   }
 ]
