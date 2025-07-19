@@ -1,21 +1,92 @@
 [
   {
-    "name": "Diamantzombie",
-    "chance": "0.000002%",
+    "name": "Aggressive Panda",
+    "chance": "0.01%",
     "dimension": "Overworld",
-    "light": "0",
-    "conditions": ["Mob mit Rüstung", "Zufällige Spawn-Variante"],
-    "note": "Extrem selten, weil Spawn mit voller Diamantrüstung mehrere Zufallsfaktoren kombiniert.",
-    "image": "images/zombie.png"
+    "light": "9",
+    "conditions": ["Muss in einem Bambuswald-Biom spawnen"],
+    "note": "Sehr selten, erscheint nur in Bambuswäldern.",
+    "image": "images/Aggressive_Panda.png"
   },
   {
-    "name": "Babyzombie auf Huhn",
-    "chance": "0.0001%",
+    "name": "Angry Wolf",
+    "chance": "0.1%",
+    "dimension": "Overworld",
+    "light": "9",
+    "conditions": ["Wolf wird durch Spieler oder andere Mobs aggressiv"],
+    "note": "Wölfe sind normalerweise friedlich, aber können aggressiv werden, wenn sie angegriffen werden.",
+    "image": "images/Angry_Wolf.png"
+  },
+  {
+    "name": "Armadillo",
+    "chance": "0.05%",
+    "dimension": "Overworld",
+    "light": "9",
+    "conditions": ["Erspawnt in Wüsten- und Savannenbiomen"],
+    "note": "Armadillos spawnen selten in trockenen Gebieten.",
+    "image": "images/Armadillo.png"
+  },
+  {
+    "name": "Axolotl Hovering in Water (cyan)",
+    "chance": "1%",
     "dimension": "Overworld",
     "light": "0",
-    "conditions": ["Babyzombie", "Reit-Huhn muss gleichzeitig spawnen"],
-    "note": "Auch bekannt als Chicken Jockey",
-    "image": "images/chicken_jockey.png"
+    "conditions": ["Axolotl spawnt nur in Höhlen mit Wasser"],
+    "note": "Axolotl sind Aquatische Tiere und spawnen in unterirdischen Wasserquellen.",
+    "image": "images/Axolotl_Hovering_in_Water_cyan.png"
+  },
+  {
+    "name": "Axolotl Hovering in Water (gold)",
+    "chance": "0.5%",
+    "dimension": "Overworld",
+    "light": "0",
+    "conditions": ["Axolotl spawnt nur in Höhlen mit Wasser"],
+    "note": "Diese Variante ist ein seltenerer Axolotl mit einer goldenen Färbung.",
+    "image": "images/Axolotl_Hovering_in_Water_gold.png"
+  },
+  {
+    "name": "Drowned",
+    "chance": "5%",
+    "dimension": "Overworld",
+    "light": "0",
+    "conditions": ["Muss unter Wasser spawnen"],
+    "note": "Drowned erscheinen in Gewässern und sind die Wasser-Version von Zombies.",
+    "image": "images/Drowned.png"
+  },
+  {
+    "name": "Ender Dragon",
+    "chance": "1%",
+    "dimension": "End",
+    "light": "0",
+    "conditions": ["End-Portal aktivieren, um den Drachen zu spawnen"],
+    "note": "Ender Dragon spawnt in der End-Dimension.",
+    "image": "images/Ender_Dragon.png"
+  },
+  {
+    "name": "Enderman",
+    "chance": "0.5%",
+    "dimension": "Overworld",
+    "light": "7",
+    "conditions": ["Muss in der Nacht spawnen"],
+    "note": "Endermen erscheinen nur bei Nacht oder in dunklen Bereichen.",
+    "image": "images/Enderman.png"
+  },
+  {
+    "name": "Wither",
+    "chance": "0.1%",
+    "dimension": "Overworld",
+    "light": "0",
+    "conditions": ["Muss vom Spieler beschworen werden"],
+    "note": "Wither ist ein Boss, der durch das Kombinieren von Seelensand und Wither-Schädeln beschworen wird.",
+    "image": "images/Wither.png"
+  },
+  {
+    "name": "Wither Skeleton",
+    "chance": "1%",
+    "dimension": "Nether",
+    "light": "0",
+    "conditions": ["Spawnt nur in Nether-Festungen"],
+    "note": "Wither Skeletons erscheinen in Nether-Festungen und sind die Quelle für Wither-Schädel.",
+    "image": "images/Wither_Skeleton.png"
   }
 ]
-
