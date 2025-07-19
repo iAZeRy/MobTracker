@@ -1,1 +1,21 @@
+[
+  {
+    "name": "Diamantzombie",
+    "chance": "0.000002%",
+    "dimension": "Overworld",
+    "light": "0",
+    "conditions": ["Mob mit Rüstung", "Zufällige Spawn-Variante"],
+    "note": "Extrem selten, weil Spawn mit voller Diamantrüstung mehrere Zufallsfaktoren kombiniert.",
+    "image": "images/zombie.png"
+  },
+  {
+    "name": "Babyzombie auf Huhn",
+    "chance": "0.0001%",
+    "dimension": "Overworld",
+    "light": "0",
+    "conditions": ["Babyzombie", "Reit-Huhn muss gleichzeitig spawnen"],
+    "note": "Auch bekannt als Chicken Jockey",
+    "image": "images/chicken_jockey.png"
+  }
+]
 
