@@ -1,21 +1,73 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MobTracker – Minecraft Mob Wahrscheinlichkeiten</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Minecraft Mob Übersicht</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: black;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .mob-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .mob-card {
+      border: 2px solid black;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 2px 2px 0 black;
+    }
+
+    .mob-card img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .mob-name {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .mob-stats {
+      font-size: 0.95rem;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>MobTracker</h1>
-    <p>Finde die Spawn-Wahrscheinlichkeiten und Bedingungen von Minecraft-Mobs</p>
-  </header>
+  <h1>Minecraft Mobs</h1>
+  <div class="mob-container">
+    
+    <!-- Beispielkarte -->
+    <div class="mob-card">
+      <img src="img/11832de1-299a-45bd-a9d4-a0cc3f90333f.png" alt="Aggressive Panda">
+      <div class="mob-name">Aggressive Panda</div>
+      <div class="mob-stats">
+        <p>Spawn: Bambuswald (Wut-Modus)</p>
+        <p>HP: 20</p>
+        <p>Angriff: 6</p>
+      </div>
+    </div>
 
-  <section class="mob-list">
-    <!-- Hier wird der JS-Code die Mobs dynamisch einfügen -->
-  </section>
+    <!-- Hier kannst du weitere Karten einfügen -->
+    <!-- <div class="mob-card">... </div> -->
 
-  <script src="script.js"></script>
+  </div>
 </body>
 </html>
