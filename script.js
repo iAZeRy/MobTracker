@@ -66,4 +66,15 @@ for(const [gruppe, mobs] of Object.entries(gruppen)) {
   // ...
 }
 
-// InfoPanel öffnen/schließen wie gehabt
+fetch('mobs.json')
+  .then(response => response.json())
+  .then(data => {
+    // Hier kannst du die Daten weiterverarbeiten und z.B. in die Seite einfügen
+    console.log(data);
+    // Beispiel: Alle Mobs auflisten
+    data.mobs.forEach(mob => {
+      // Füge die Infos ins HTML ein
+      // z.B. document.getElementById('mob-list').innerHTML += ...
+    });
+  })
+  .catch(error => console.error('Fehler beim Laden der JSON:', error));
