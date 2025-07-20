@@ -44,6 +44,15 @@
       "spawnrate": "100%",
       "lebenspunkte": 100,
       "biom": "END"
+    },
+     {
+      "name": "Warden",
+      "group": "Boss",
+      "description": "Wird gespawned von Spieler",
+      "image": "Warden.png",
+      "spawnrate": "100%",
+      "lebenspunkte": 500,
+      "biom": "Deep Dark"
     }
   ]
 }
