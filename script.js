@@ -58,11 +58,13 @@ function showInfoPanel(mob) {
     const panel = document.getElementById('infoPanel');
     document.getElementById('infoTitle').innerText = mob.name;
     document.getElementById('infoContent').innerText = mob.description || "Keine Beschreibung.";
-    panel.hidden = false;
-    // Optional: Info-Panel neben die angeklickte Karte positionieren (CSS anpassen)
+    panel.hidden = false; // optional, kann entfernt werden
+    panel.classList.add('active'); // <-- das ist wichtig!
 }
 document.getElementById('closeInfoPanel').onclick = () => {
-    document.getElementById('infoPanel').hidden = true;
+    const panel = document.getElementById('infoPanel');
+    panel.classList.remove('active');
+    panel.hidden = true; // optional
 };
 
 let allMobs = [];
