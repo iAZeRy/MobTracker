@@ -4,7 +4,7 @@
       "name": "Zombie",
       "group": "Zombie",
       "description": "Ein Standard-Zombie, der nachts erscheint.",
-      "image": "zombie.png",
+      "image": "Zombie.png",
       "spawnrate": 80,
       "lebenspunkte": 20,
       "biom": "Alle außer Pilzland"
