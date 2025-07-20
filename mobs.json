@@ -5,9 +5,9 @@
       "group": "Zombie",
       "description": "Ein Standard-Zombie, der nachts erscheint.",
       "image": "Zombie.png",
-      "spawnrate": 80,
-      "lebenspunkte": 20,
-      "biom": "Alle außer Pilzland"
+      "spawnrate": "Spawnrate: 80%",
+      "lebenspunkte": "HP: 20",
+      "biom": "Biom: Alle außer Pilzland"
     },
     {
       "name": "Drowned",
