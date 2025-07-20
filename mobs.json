@@ -101,13 +101,13 @@
     "image": "images/Drowned.png",
     "spawnBiome": ["Ocean (Java auf Y<58)","River","Dripstone Caves"],
     "spawnChance": "Simon unter dem Monster‑Cap; häufig im Wasser bei Lichtlevel ≤ 0",
-    "note": "Spawnen bei Lichtlevel 0 in Ozeanen und Flüssen; ca. 5 % tragen Trident (Java), 15 % Trident (Bedrock)." :contentReference[oaicite:2]{index=2}
+    "note": "Spawnen bei Lichtlevel 0 in Ozeanen und Flüssen; ca. 5 % tragen Trident (Java), 15 % Trident (Bedrock)."
   },
   {
     "name": "Wither Skeleton",
     "image": "images/Wither_Skeleton.png",
     "spawnBiome": ["Nether Fortress"],
     "spawnChance": "≈ 80 % aller Skelett‑Spawns in Nether‑Festungen",
-    "note": "Within Nether fortress skeleton spawners spawn 80 % of the time Wither Skeletons." :contentReference[oaicite:3]{index=3}
+    "note": "Within Nether fortress skeleton spawners spawn 80 % of the time Wither Skeletons."
   }
 ]
