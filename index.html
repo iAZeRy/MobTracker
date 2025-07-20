@@ -2,133 +2,136 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Minecraft Mob Tracker</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Mob Varianten Übersicht</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+    }
+    .group {
+      border: 1px solid #444;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+    .group-header {
+      background: #222;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .variants {
+      display: none;
+      background: #1a1a1a;
+      padding: 10px;
+    }
+    .variant {
+      margin-bottom: 8px;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+    .variant:hover {
+      background: #333;
+    }
+    .details {
+      margin-top: 10px;
+      background: #222;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
 
-    <!-- Zombie Gruppe -->
-    <details open class="mob-group">
-      <summary> Zombies</summary>
-      <div class="mob-grid">
-        <!-- Zombie Variants -->
-        <div class="mob">
-          <img src="images/Zombie_Blacksmith.png" alt="Zombie_Blacksmith">
-          <p>Zombie Blacksmith</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_Butcher.png" alt="Zombie_Butcher">
-          <p>Zombie Butcher</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_Farmer.png" alt="Zombie_Farmer">
-          <p>Zombie Farmer</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_Horse_Revision.png" alt="Zombie_Horse_Revision">
-          <p>Zombie Horse</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_in_chainmail_armor.png" alt="Zombie in chainmail armor">
-          <p>Kettenrüstung</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_in_diamond_armor.png" alt="Zombie in diamond armor">
-          <p>Diamantrüstung</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_in_golden_armor.png" alt="Zombie in golden armor">
-          <p>Goldrüstung</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_in_iron_armor.png" alt="Zombie in iron armor">
-          <p>Eisenrüstung</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_in_leather_armor.png" alt="Zombie in leather armor">
-          <p>Lederüstung</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_Librarian.png" alt="Zombie Librarian">
-          <p>Zombie Librarian</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_Nitwit.png" alt="Zombie Nitwit">
-          <p>Zombie Nitwit</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_Priest.png" alt="Zombie Priest">
-          <p>Zombie Priest</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_Villager_with_Carved_Pumpkin.png" alt="Zombie Villager with Carved Pumpkin">
-          <p>Mit Kürbis</p>
-        </div>
-        <div class="mob">
-          <img src="images/Zombie_with_Carved_Pumpkin.png" alt="Zombie with Carved Pumpkin">
-          <p>Mit Kürbis</p>
-        </div>
-      </div>
-    </details>
+  <h1>Mob Varianten Übersicht</h1>
 
-    <!-- Weitere Gruppen -->
-    <details class="mob-group">
-      <summary> Chicken Jockeys</summary>
-      <div class="mob-grid">
-        <div class="mob">
-          <img src="images/Chicken_Jockey_with_Carved_Pumpkin.png">
-          <p>Mit Kürbis</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Savanna_Zombie_Jockey.png">
-          <p>Savanna</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Snowy_Zombie_Jockey.png">
-          <p>Schnee</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Swamp_Zombie_Jockey.png">
-          <p>Sumpf</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Taiga_Zombie_Jockey.png">
-          <p>Taiga</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Zombie_Butcher_Jockey.png">
-          <p>Butcher</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Zombie_Farmer_Jockey.png">
-          <p>Farmer</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Zombie_Librarian_Jockey.png">
-          <p>Librarian</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Zombie_Nitwit_Jockey.png">
-          <p>Nitwit</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Zombie_Pigman_Jockey.png">
-          <p>Pigman</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Zombie_Priest_Jockey.png">
-          <p>Priest</p>
-        </div>
-        <div class="mob">
-          <img src="images/Chicken_Zombie_Smith_Jockey.png">
-          <p>Smith</p>
-        </div>
-      </div>
-    </details>
+  <div id="mob-container"></div>
 
-    <!-- Weitere Gruppen wie Axolotl, Boss-Mobs, Tiere etc. kannst du auf Wunsch genauso erweitern -->
+  <script>
+    const data = {
+      "Zombie": [
+        "Zombie_Blacksmith",
+        "Zombie_Butcher",
+        "Zombie_Farmer",
+        "Zombie_Horse_Revision",
+        "Zombie_in_chainmail_armor",
+        "Zombie_in_diamond_armor",
+        "Zombie_in_golden_armor",
+        "Zombie_in_iron_armor",
+        "Zombie_in_leather_armor",
+        "Zombie_Librarian",
+        "Zombie_Nitwit",
+        "Zombie_Priest",
+        "Zombie_Villager_with_Carved_Pumpkin",
+        "Zombie_with_Carved_Pumpkin"
+      ],
+      "Chicken Jockeys": [
+        "Chicken_Jockey_with_Carved_Pumpkin",
+        "Chicken_Savanna_Zombie_Jockey",
+        "Chicken_Snowy_Zombie_Jockey",
+        "Chicken_Swamp_Zombie_Jockey",
+        "Chicken_Taiga_Zombie_Jockey",
+        "Chicken_Zombie_Butcher_Jockey",
+        "Chicken_Zombie_Farmer_Jockey",
+        "Chicken_Zombie_Librarian_Jockey",
+        "Chicken_Zombie_Nitwit_Jockey",
+        "Chicken_Zombie_Pigman_Jockey",
+        "Chicken_Zombie_Priest_Jockey",
+        "Chicken_Zombie_Smith_Jockey"
+      ],
+      "Boss Mobs": ["Ender_Dragon", "Wither"],
+      "Undead": ["Drowned", "Wither_Skeleton"],
+      "Axolotls": ["Axolotl_Hovering_in_Water_cyan", "Axolotl_Hovering_in_Water_gold"],
+      "Kleine Tiere": ["Armadillo"],
+      "End Mob": ["Enderman"]
+    };
 
-  </div>
+    const mobContainer = document.getElementById("mob-container");
+
+    for (const [group, variants] of Object.entries(data)) {
+      const groupEl = document.createElement("div");
+      groupEl.className = "group";
+
+      const header = document.createElement("div");
+      header.className = "group-header";
+      header.textContent = group;
+
+      const variantList = document.createElement("div");
+      variantList.className = "variants";
+
+      variants.forEach(name => {
+        const variantEl = document.createElement("div");
+        variantEl.className = "variant";
+        variantEl.textContent = name;
+
+        const detailBox = document.createElement("div");
+        detailBox.className = "details";
+        detailBox.innerHTML = `<strong>${name}</strong><br>Biom: <em>Unbekannt</em><br>Wahrscheinlichkeit: <em>Unbekannt</em>`;
+
+        variantEl.addEventListener("click", () => {
+          // Alle anderen Details schließen
+          document.querySelectorAll('.details').forEach(el => el.style.display = 'none');
+          detailBox.style.display = 'block';
+        });
+
+        variantList.appendChild(variantEl);
+        variantList.appendChild(detailBox);
+      });
+
+      header.addEventListener("click", () => {
+        variantList.style.display = variantList.style.display === "block" ? "none" : "block";
+      });
+
+      groupEl.appendChild(header);
+      groupEl.appendChild(variantList);
+      mobContainer.appendChild(groupEl);
+    }
+  </script>
+
 </body>
 </html>
