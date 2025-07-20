@@ -49,3 +49,21 @@ document.getElementById('closeInfoPanel').onclick = () => {
 };
 
 renderMobs();
+
+const gruppen = {
+  Zombies: [
+    "Zombie_in_diamond_armor",
+    "Zombie_Farmer",
+    "Zombie_with_Carved_Pumpkin"
+  ],
+  "Chicken Jockeys": [
+    "Chicken_Swamp_Zombie_Jockey",
+    "Chicken_Taiga_Zombie_Jockey"
+  ]
+};
+// Erzeugt die Gruppen dynamisch
+for(const [gruppe, mobs] of Object.entries(gruppen)) {
+  // ...
+}
+
+// InfoPanel öffnen/schließen wie gehabt
