@@ -1,59 +1,54 @@
-body {
-  background-color: #111;
-  font-family: sans-serif;
-  color: white;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.mob-group {
-  margin-bottom: 20px;
-  background: #222;
-  border-radius: 6px;
-  padding: 10px;
-}
-
-.mob-group summary {
-  font-size: 1.5em;
+.accordion {
+  background-color: #333;
+  color: #fff;
   cursor: pointer;
-  font-weight: bold;
-  padding: 10px 0;
-}
-
-.mob-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.mob {
-  background: #333;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
-  transition: 0.2s ease;
-}
-
-.mob img {
+  padding: 12px 20px;
   width: 100%;
-  height: auto;
-  border-radius: 6px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1.1em;
+  transition: 0.4s;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
-.mob p {
-  margin-top: 8px;
+.accordion:hover {
+  background-color: #444;
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  flex-direction: column;
+  background-color: #222;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.mob-entry {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  background-color: #1a1a1a;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.mob-entry img {
+  width: 64px;
+  height: 64px;
+  margin-right: 15px;
+}
+
+.mob-info h3 {
+  margin: 0 0 5px;
+  font-size: 1em;
+  color: #fff;
+}
+
+.mob-info p {
+  margin: 0;
   font-size: 0.9em;
   color: #ccc;
-}
-
-.mob:hover {
-  transform: scale(1.05);
-  background-color: #444;
 }
