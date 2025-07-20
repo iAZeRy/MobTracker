@@ -58,7 +58,6 @@ function showInfoPanel(mob) {
     const panel = document.getElementById('infoPanel');
     document.getElementById('infoTitle').innerText = mob.name;
     document.getElementById('infoContent').innerText = mob.description || "Keine Beschreibung.";
-    panel.hidden = false; // optional, kann entfernt werden
     panel.classList.add('active'); // <-- das ist wichtig!
 }
 document.getElementById('closeInfoPanel').onclick = () => {
