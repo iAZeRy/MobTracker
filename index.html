@@ -76,8 +76,13 @@
 </head>
 <body>
   <h1>Mob Tracker</h1>
-  <div class="main-layout">
-    <div class="mob-content">
+  <main id="mobList"></main>
+  <div id="infoPanel" class="info-panel" aria-live="polite" hidden>
+    <button id="closeInfoPanel" aria-label="Schließen">×</button>
+    <div class="info-title" id="infoTitle"></div>
+    <div class="info-content" id="infoContent"></div>
+  </div>
+  <script src="main.js"></script>
 
   <!-- Beispielgruppe: Zombie -->
   <details>
@@ -128,65 +133,5 @@
      onclick="showInfo('Zombie_in_diamond_armor')">
   ...
 </div>
-
-  <script>
-    const mobData = {
-      Zombie_in_diamond_armor: {
-        name: "Zombie mit Diamantrüstung",
-        biome: "Alle Biome",
-        chance: "Sehr selten",
-        difficulty: "Alle, höhere Chance auf Hard"
-      },
-      Zombie_Farmer: {
-        name: "Zombie Bauer",
-        biome: "Dörfer (Plains, Savanna etc.)",
-        chance: "Mittel",
-        difficulty: "Normal, Hard"
-      },
-      Zombie_with_Carved_Pumpkin: {
-        name: "Zombie mit Kürbis",
-        biome: "Alle Biome (nur Halloween)",
-        chance: "1%", 
-        difficulty: "Alle"
-      },
-      Chicken_Swamp_Zombie_Jockey: {
-        name: "Swamp Chicken Jockey",
-        biome: "Sumpf",
-        chance: "Sehr selten (Baby-Zombie auf Huhn)",
-        difficulty: "Alle"
-      },
-      Chicken_Taiga_Zombie_Jockey: {
-        name: "Taiga Chicken Jockey",
-        biome: "Taiga",
-        chance: "Sehr selten",
-        difficulty: "Alle"
-      },
-      // Weitere Mobs hier eintragen...
-    };
-
-    function showInfo(id) {
-      const mob = mobData[id];
-      if (!mob) return;
-
-      document.getElementById("infoTitle").innerText = mob.name;
-      document.getElementById("infoContent").innerHTML = `
-        <strong>Biome:</strong> ${mob.biome}<br/>
-        <strong>Spawn-Wahrscheinlichkeit:</strong> ${mob.chance}<br/>
-        <strong>Schwierigkeitsgrad:</strong> ${mob.difficulty}
-      `;
-
-      document.getElementById("infoPanel").classList.add("active");
-    }
-  </script>
-    <body>
-  <h1>Mob Tracker</h1>
-  <section class="mob-content" id="mobContent"></section>
-  <div id="infoPanel" class="info-panel" aria-live="polite">
-    <button id="closeInfoPanel" aria-label="Schließen">×</button>
-    <div class="info-title" id="infoTitle"></div>
-    <div class="info-content" id="infoContent"></div>
-  </div>
-  <script src="main.js"></script>
-</body>
 </body>
 </html>
