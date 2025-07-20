@@ -1,43 +1,177 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MobTracker – Spawn­wahrscheinlichkeiten</title>
+  <meta charset="UTF-8">
+  <title>Mob Galerie</title>
   <style>
-    body { margin:20px; font-family:Arial,sans-serif; background:#fff; color:#000; }
-    h1 { text-align:center; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
-    .card { border:1px solid #000; border-radius:8px; padding:10px; text-align:center; }
-    .card img { max-width:100%; height:auto; }
-    .name { font-size:1.2rem; font-weight:bold; margin:0.5em 0; }
-    .props { font-size:0.9rem; color:#333; text-align:left; }
+    body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .mob-card {
+      background-color: #1c1c1c;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+      width: 180px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    .mob-card img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
-  <h1>MobTracker – Spawn­wahrscheinlichkeiten</h1>
-  <div class="grid"></div>
-
-  <script>
-    fetch('mobs.json')
-      .then(r => r.json())
-      .then(data => {
-        const grid = document.querySelector('.grid');
-        data.forEach(m => {
-          const c = document.createElement('div');
-          c.className = 'card';
-          c.innerHTML = `
-            <img src="${m.image}" alt="${m.name}">
-            <div class="name">${m.name}</div>
-            <div class="props">
-              <p><strong>Biom:</strong> ${m.spawnBiome.join(', ')}</p>
-              <p><strong>Spawn‑Chance:</strong> ${m.spawnChance}</p>
-              ${m.note ? `<p><em>${m.note}</em></p>` : ''}
-            </div>`;
-          grid.appendChild(c);
-        });
-      })
-      .catch(console.error);
-  </script>
+  <div class="mob-card">
+    <img src="images/Aggressive_Panda.png" alt="Aggressive Panda">
+    <div>Aggressive Panda</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Angry_Wolf.png" alt="Angry Wolf">
+    <div>Angry Wolf</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Armadillo.png" alt="Armadillo">
+    <div>Armadillo</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Axolotl_Hovering_in_Water_cyan.png" alt="Axolotl Hovering in Water cyan">
+    <div>Axolotl Hovering in Water (Cyan)</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Axolotl_Hovering_in_Water_gold.png" alt="Axolotl Hovering in Water gold">
+    <div>Axolotl Hovering in Water (Gold)</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Jockey_with_Carved_Pumpkin.png" alt="Chicken Jockey with Carved Pumpkin">
+    <div>Chicken Jockey w/ Pumpkin</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Savanna_Zombie_Jockey.png" alt="Chicken Savanna Zombie Jockey">
+    <div>Savanna Zombie Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Snowy_Zombie_Jockey.png" alt="Chicken Snowy Zombie Jockey">
+    <div>Snowy Zombie Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Swamp_Zombie_Jockey.png" alt="Chicken Swamp Zombie Jockey">
+    <div>Swamp Zombie Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Taiga_Zombie_Jockey.png" alt="Chicken Taiga Zombie Jockey">
+    <div>Taiga Zombie Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Zombie_Butcher_Jockey.png" alt="Chicken Zombie Butcher Jockey">
+    <div>Zombie Butcher Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Zombie_Farmer_Jockey.png" alt="Chicken Zombie Farmer Jockey">
+    <div>Zombie Farmer Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Zombie_Librarian_Jockey.png" alt="Chicken Zombie Librarian Jockey">
+    <div>Zombie Librarian Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Zombie_Nitwit_Jockey.png" alt="Chicken Zombie Nitwit Jockey">
+    <div>Zombie Nitwit Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Zombie_Pigman_Jockey.png" alt="Chicken Zombie Pigman Jockey">
+    <div>Zombie Pigman Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Zombie_Priest_Jockey.png" alt="Chicken Zombie Priest Jockey">
+    <div>Zombie Priest Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Chicken_Zombie_Smith_Jockey.png" alt="Chicken Zombie Smith Jockey">
+    <div>Zombie Smith Jockey</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Drowned.png" alt="Drowned">
+    <div>Drowned</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Ender_Dragon.png" alt="Ender Dragon">
+    <div>Ender Dragon</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Enderman.png" alt="Enderman">
+    <div>Enderman</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Wither.png" alt="Wither">
+    <div>Wither</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Wither_Skeleton.png" alt="Wither Skeleton">
+    <div>Wither Skeleton</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_Blacksmith.png" alt="Zombie Blacksmith">
+    <div>Zombie Blacksmith</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_Butcher.png" alt="Zombie Butcher">
+    <div>Zombie Butcher</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_Farmer.png" alt="Zombie Farmer">
+    <div>Zombie Farmer</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_Horse_Revision.png" alt="Zombie Horse Revision">
+    <div>Zombie Horse</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_in_chainmail_armor.png" alt="Zombie in chainmail armor">
+    <div>Zombie (Chainmail)</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_in_diamond_armor.png" alt="Zombie in diamond armor">
+    <div>Zombie (Diamond)</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_in_golden_armor.png" alt="Zombie in golden armor">
+    <div>Zombie (Gold)</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_in_iron_armor.png" alt="Zombie in iron armor">
+    <div>Zombie (Iron)</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_in_leather_armor.png" alt="Zombie in leather armor">
+    <div>Zombie (Leather)</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_Librarian.png" alt="Zombie Librarian">
+    <div>Zombie Librarian</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_Nitwit.png" alt="Zombie Nitwit">
+    <div>Zombie Nitwit</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_Priest.png" alt="Zombie Priest">
+    <div>Zombie Priest</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_Villager_with_Carved_Pumpkin.png" alt="Zombie Villager with Carved Pumpkin">
+    <div>Zombie Villager w/ Pumpkin</div>
+  </div>
+  <div class="mob-card">
+    <img src="images/Zombie_with_Carved_Pumpkin.png" alt="Zombie with Carved Pumpkin">
+    <div>Zombie w/ Pumpkin</div>
+  </div>
 </body>
 </html>
