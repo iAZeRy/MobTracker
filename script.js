@@ -20,21 +20,21 @@ function renderGroups(groups) {
         groupSection.className = 'mob-group';
         groupSection.innerHTML = `<h2>${group}</h2><div class="mob-group-cards"></div>`;
         const cardsContainer = groupSection.querySelector('.mob-group-cards');
-       groups[group].forEach(mob => {
-    const card = document.createElement('div');
-    card.className = 'mob-card';
-    card.tabIndex = 0;
-    card.innerText = mob.name;
-    card.addEventListener('click', () => showInfoPanel(mob));
+        groups[group].forEach(mob => {
+            const card = document.createElement('div');
+            card.className = 'mob-card';
+            card.tabIndex = 0;
+            card.innerText = mob.name;
+            card.addEventListener('click', () => showInfoPanel(mob));
 
-    // Bild einfügen:
-    const img = document.createElement('img');
-    img.src = `images/${mob.image}`;
-    img.alt = mob.name;
-    card.appendChild(img);
+            // Bild einfügen:
+            const img = document.createElement('img');
+            img.src = `images/${mob.image}`;
+            img.alt = mob.name;
+            card.appendChild(img);
 
-    cardsContainer.appendChild(card);
-});
+            cardsContainer.appendChild(card);
+        });
         mobList.appendChild(groupSection);
     }
 }
@@ -56,7 +56,7 @@ searchInput.addEventListener('input', (e) => {
 });
 
 function showInfoPanel(mob) {
-  openModal(`<h2>${mob.name}</h2><p>${mob.description || "Keine Beschreibung."}</p>`);
+    openModal(`<h2>${mob.name}</h2><p>${mob.description || "Keine Beschreibung."}</p>`);
 }
 
 let allMobs = [];
@@ -66,9 +66,9 @@ loadMobs().then(data => {
 });
 
 function openModal(info) {
-  document.getElementById('infotext').innerHTML = info;
-  document.getElementById('infopanel-modal').style.display = 'block';
+    document.getElementById('infotext').innerHTML = info;
+    document.getElementById('infopanel-modal').style.display = 'block';
 }
 function closeModal() {
-  document.getElementById('infopanel-modal').style.display = 'none';
+    document.getElementById('infopanel-modal').style.display = 'none';
 }
