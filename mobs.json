@@ -22,7 +22,7 @@
       "name": "Drowned",
       "group": "Zombie",
       "description": "Ein ertrunkener Zombie, der im Wasser spawnt.",
-      "image": "drowned.png",
+      "image": "Drowned.png",
       "spawnrate": 10,
       "lebenspunkte": 20,
       "biom": "Flüsse, Ozeane"
