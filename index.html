@@ -30,7 +30,6 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 10px;
-      @media
     }
 
     .mob-card {
@@ -41,8 +40,6 @@
       text-align: center;
       cursor: pointer;
       transition: transform 0.2s;
-      role="button";
-      tabindex="0"
     }
 
     .mob-card:hover {
@@ -100,11 +97,6 @@
       </div>
       <!-- Füge weitere Zombie-Varianten hier ein -->
        </div>
-   <div id="infoPanel" class="info-panel" aria-live="polite">
-      <button id="closeInfoPanel" aria-label="Schließen">×</button>
-      <div class="info-title" id="infoTitle"></div>
-      <div class="info-content" id="infoContent"></div>
-    </div>
     </div>
   </details>
 
@@ -126,10 +118,10 @@
 
   <!-- Info-Feld -->
  <div id="infoPanel" class="info-panel" aria-live="polite">
-  <button id="closeInfoPanel" aria-label="Schließen">×</button>
-  <div class="info-title" id="infoTitle"></div>
-  <div class="info-content" id="infoContent"></div>
-</div>
+      <button id="closeInfoPanel" aria-label="Schließen">×</button>
+      <div class="info-title" id="infoTitle"></div>
+      <div class="info-content" id="infoContent"></div>
+    </div>
  
   <div class="mob-card" tabindex="0" role="button" aria-label="Diamond Armor Zombie"
      onkeydown="if(event.key==='Enter'||event.key===' '){showInfo('Zombie_in_diamond_armor')}"
@@ -186,5 +178,15 @@
       document.getElementById("infoPanel").classList.add("active");
     }
   </script>
+    <body>
+  <h1>Mob Tracker</h1>
+  <section class="mob-content" id="mobContent"></section>
+  <div id="infoPanel" class="info-panel" aria-live="polite">
+    <button id="closeInfoPanel" aria-label="Schließen">×</button>
+    <div class="info-title" id="infoTitle"></div>
+    <div class="info-content" id="infoContent"></div>
+  </div>
+  <script src="main.js"></script>
+</body>
 </body>
 </html>
