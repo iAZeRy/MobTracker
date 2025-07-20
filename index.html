@@ -76,11 +76,12 @@
 </head>
 <body>
   <h1>Mob Tracker</h1>
-  <div class="main-layout">
-  <main id="mobList"></main>
-  <div class="mob" onclick="showInfo(this)">
-  <img src="mob.png" alt="Mob">
-  <div class="infopanel">Hier steht die Info zum Mob.</div>
+  <div id="infopanel-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="infotext"></div>
+  </div>
+</div>
 </div>
 </div>
     <div id="mobList"></div>
