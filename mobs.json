@@ -7,7 +7,7 @@
       "image": "Zombie.png",
       "spawnrate": "80%",
       "lebenspunkte": "20 ♥ × 10",
-      "biom": "Alle außer Pilzland"
+      "biom": "Alle außer in Mushroom Fields und Deep Dark"
     },
     {
       "name": "Drowned",
