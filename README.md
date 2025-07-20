@@ -8,7 +8,7 @@ Eine kleine Web-App, mit der du dir eine Übersicht über Minecraft-Mobs anzeige
 
 ## 📸 Vorschau
 
-![Vorschau der Anwendung](images/vorschau.png)
+![Vorschau der Anwendung](vorschau.png)
 
 ## 🔍 Funktionen
 
