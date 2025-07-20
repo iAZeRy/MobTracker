@@ -49,3 +49,54 @@
   margin-top: 5px;
   font-size: 0.9em;
 }
+.mob-group {
+  margin-bottom: 1rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.mob-group-header {
+  background: #222;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.mob-variants {
+  display: none;
+  background: #111;
+  padding: 1rem;
+}
+
+.mob-variant {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  background: #1b1b1b;
+  padding: 0.5rem;
+  border-radius: 4px;
+  position: relative;
+}
+
+.mob-variant img {
+  width: 48px;
+  height: 48px;
+}
+
+.mob-info {
+  display: none;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  background: #2a2a2a;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: #ccc;
+}
+
+.mob-variant.active .mob-info {
+  display: flex;
+}
