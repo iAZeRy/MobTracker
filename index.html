@@ -78,11 +78,10 @@
   <h1>Mob Tracker</h1>
   <div class="main-layout">
   <main id="mobList"></main>
-  <div id="infoPanel" class="info-panel" aria-live="polite" hidden>
-    <button id="closeInfoPanel" aria-label="Schließen">×</button>
-    <div class="info-title" id="infoTitle"></div>
-    <div class="info-content" id="infoContent"></div>
-  </div>
+  <div class="mob" onclick="showInfo(this)">
+  <img src="mob.png" alt="Mob">
+  <div class="infopanel">Hier steht die Info zum Mob.</div>
+</div>
 </div>
     <div id="mobList"></div>
     <div id="infoPanel"></div>
