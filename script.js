@@ -1,103 +1,28 @@
-const mobGroups = [
-  {
-    groupName: "Zombies",
-    mobs: [
-      {
-        name: "Zombie_Blacksmith",
-        location: "Overworld – Dörfer",
-        spawnChance: "2%",
-        difficulty: "Normal & Schwer"
-      },
-      {
-        name: "Zombie_Butcher",
-        location: "Overworld – Dörfer",
-        spawnChance: "2%",
-        difficulty: "Normal & Schwer"
-      },
-      {
-        name: "Zombie_Farmer",
-        location: "Overworld – Dörfer",
-        spawnChance: "2%",
-        difficulty: "Normal & Schwer"
-      },
-      {
-        name: "Zombie_Fisherman",
-        location: "Overworld – Dörfer",
-        spawnChance: "2%",
-        difficulty: "Normal & Schwer"
-      },
-      {
-        name: "Zombie_Librarian",
-        location: "Overworld – Dörfer",
-        spawnChance: "2%",
-        difficulty: "Normal & Schwer"
-      },
-      {
-        name: "Zombie_Shepherd",
-        location: "Overworld – Dörfer",
-        spawnChance: "2%",
-        difficulty: "Normal & Schwer"
-      }
-    ]
-  },
-  {
-    groupName: "Chicken Jockeys",
-    mobs: [
-      {
-        name: "Chicken_Jockey_Baby_Zombie",
-        location: "Overworld – Dunkle Orte",
-        spawnChance: "0.25%",
-        difficulty: "Normal & Schwer"
-      },
-      {
-        name: "Chicken_Jockey_Baby_Husk",
-        location: "Wüsten",
-        spawnChance: "0.25%",
-        difficulty: "Normal & Schwer"
-      }
-    ]
-  }
-];
-
-function renderMobs() {
-  const container = document.getElementById("mobContainer");
-  container.innerHTML = "";
-
-  mobGroups.forEach((group, i) => {
-    const groupWrapper = document.createElement("div");
-    groupWrapper.classList.add("mob-group");
-
-    const header = document.createElement("div");
-    header.classList.add("accordion-header");
-    header.innerText = group.groupName;
-    header.addEventListener("click", () => {
-      const content = groupWrapper.querySelector(".accordion-content");
-      content.style.display = content.style.display === "none" ? "block" : "none";
+<script>
+  // Gruppen öffnen/schließen
+  document.querySelectorAll('.group-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const variants = button.nextElementSibling;
+      variants.style.display = variants.style.display === 'flex' ? 'none' : 'flex';
     });
-
-    const content = document.createElement("div");
-    content.classList.add("accordion-content");
-    content.style.display = "none";
-
-    group.mobs.forEach(mob => {
-      const mobDiv = document.createElement("div");
-      mobDiv.classList.add("mob-card");
-      
-      mobDiv.innerHTML = `
-        <h3>${mob.name.replace(/_/g, " ")}</h3>
-        <p><strong>Ort:</strong> ${mob.location}</p>
-        <p><strong>Spawnrate:</strong> ${mob.spawnChance}</p>
-        <p><strong>Schwierigkeit:</strong> ${mob.difficulty}</p>
-        <video src="videos/${mob.name}.webm" autoplay loop muted width="160" height="160"></video>
-      `;
-      
-      content.appendChild(mobDiv);
-    });
-
-    groupWrapper.appendChild(header);
-    groupWrapper.appendChild(content);
-    container.appendChild(groupWrapper);
   });
-}
 
-renderMobs();
+  // Infos ein-/ausblenden
+  function toggleInfo(card) {
+    const infoBox = card.querySelector('.mob-info');
+
+    // Wenn schon offen, schließen
+    if (infoBox.style.display === 'block') {
+      infoBox.style.display = 'none';
+      card.style.transform = 'scale(1)';
+    } else {
+      // Alle anderen schließen
+      document.querySelectorAll('.mob-info').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.mob-card').forEach(el => el.style.transform = 'scale(1)');
+
+      // Diese öffnen
+      infoBox.style.display = 'block';
+      card.style.transform = 'scale(1.05)';
+    }
+  }
+</script>
