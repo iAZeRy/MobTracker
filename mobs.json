@@ -35,6 +35,15 @@
       "spawnrate": "100%",
       "lebenspunkte": 100,
       "biom": "Spawned vom Spieler"
+    },
+    {
+      "name": "Ender Dragon",
+      "group": "Boss",
+      "description": "",
+      "image": "Ender_Dragon.png",
+      "spawnrate": "100%",
+      "lebenspunkte": 100,
+      "biom": "END"
     }
   ]
 }
