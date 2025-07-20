@@ -37,3 +37,13 @@
 main#mobList {
     margin-right: 320px; /* Platz für das Info-Panel */
 }
+
+.mobs-container {
+  display: flex;
+  flex-wrap: wrap; /* Optional, damit die Mobs umbrechen, wenn der Platz nicht reicht */
+  gap: 16px; /* Abstand zwischen den Mobs */
+}
+.mob {
+  flex: 0 1 150px; /* oder eine feste Breite, z.B. width: 150px; */
+  /* Optional: weitere Styles wie border, padding etc. */
+}
