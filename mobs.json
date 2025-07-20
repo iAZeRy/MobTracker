@@ -14,8 +14,8 @@
       "group": "Zombie",
       "description": "Ein ertrunkener Zombie, der im Wasser spawnt.",
       "image": "Drowned.png",
-      "spawnrate": 10,
-      "lebenspunkte": 20,
+      "spawnrate": "Spawnrate: 10%",
+      "lebenspunkte": "HP: 20",
       "biom": "Flüsse, Ozeane"
     },
     {
