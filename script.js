@@ -64,4 +64,7 @@ loadMobs().then(data => {
     renderGroups(groupMobs(allMobs));
 });
 
-// Searchbar-Eventlistener wie oben beschrieben
+const img = document.createElement('img');
+img.src = `images/${mob.image}`;
+img.alt = mob.name;
+card.appendChild(img);
