@@ -1,31 +1,59 @@
+body {
+  background-color: #111;
+  font-family: sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
 .mob-group {
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  background: #222;
   border-radius: 6px;
-  overflow: hidden;
+  padding: 10px;
 }
 
-.accordion-header {
-  background-color: #333;
-  color: #fff;
-  padding: 12px;
-  font-weight: bold;
+.mob-group summary {
+  font-size: 1.5em;
   cursor: pointer;
-  user-select: none;
+  font-weight: bold;
+  padding: 10px 0;
 }
 
-.accordion-content {
-  padding: 10px;
-  background-color: #f9f9f9;
+.mob-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
 }
 
-.mob-card {
-  border: 1px solid #ddd;
+.mob {
+  background: #333;
+  border-radius: 8px;
   padding: 10px;
-  margin-bottom: 10px;
+  text-align: center;
+  transition: 0.2s ease;
+}
+
+.mob img {
+  width: 100%;
+  height: auto;
   border-radius: 6px;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  max-width: 320px;
+}
+
+.mob p {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #ccc;
+}
+
+.mob:hover {
+  transform: scale(1.05);
+  background-color: #444;
 }
