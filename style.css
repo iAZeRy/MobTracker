@@ -1,59 +1,51 @@
-body {
-  background-color: #111;
-  font-family: sans-serif;
-  color: white;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
 .mob-group {
   margin-bottom: 20px;
-  background: #222;
-  border-radius: 6px;
-  padding: 10px;
+  border: 2px solid #444;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.mob-group summary {
-  font-size: 1.5em;
-  cursor: pointer;
-  font-weight: bold;
-  padding: 10px 0;
-}
-
-.mob-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.mob {
-  background: #333;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
-  transition: 0.2s ease;
-}
-
-.mob img {
+.group-toggle {
   width: 100%;
-  height: auto;
-  border-radius: 6px;
+  background: #222;
+  color: #fff;
+  padding: 10px;
+  font-size: 1.2em;
+  text-align: left;
+  border: none;
+  cursor: pointer;
 }
 
-.mob p {
-  margin-top: 8px;
+.mob-variants {
+  display: none;
+  padding: 10px;
+  background: #111;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mob-card {
+  position: relative;
+  background: #1b1b1b;
+  border: 1px solid #333;
+  padding: 5px;
+  width: 120px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mob-card:hover {
+  background: #2b2b2b;
+}
+
+.mob-info {
+  display: none;
+  background: #2a2a2a;
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+  margin-top: 5px;
   font-size: 0.9em;
-  color: #ccc;
-}
-
-.mob:hover {
-  transform: scale(1.05);
-  background-color: #444;
 }
