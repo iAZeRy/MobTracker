@@ -43,7 +43,8 @@ const searchInput = document.createElement('input');
 searchInput.type = 'text';
 searchInput.id = 'mobSearch';
 searchInput.placeholder = 'Mob suchen...';
-document.body.insertBefore(searchInput, document.getElementById('mobList'));
+const mobList = document.getElementById('mobList');
+mobList.parentNode.insertBefore(searchInput, mobList);
 
 searchInput.addEventListener('input', (e) => {
     const search = e.target.value.toLowerCase();
