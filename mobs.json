@@ -5,17 +5,17 @@
       "group": "Zombie",
       "description": "Ein Standard-Zombie, der nachts erscheint.",
       "image": "Zombie.png",
-      "spawnrate": "Spawnrate: 80%",
-      "lebenspunkte": "HP: 20",
-      "biom": "Biom: Alle außer Pilzland"
+      "spawnrate": "80%",
+      "lebenspunkte": 20,
+      "biom": "Alle außer Pilzland"
     },
     {
       "name": "Drowned",
       "group": "Zombie",
       "description": "Ein ertrunkener Zombie, der im Wasser spawnt.",
       "image": "Drowned.png",
-      "spawnrate": "Spawnrate: 10%",
-      "lebenspunkte": "HP: 20",
+      "spawnrate": "10%",
+      "lebenspunkte": 20,
       "biom": "Flüsse, Ozeane"
     },
     {
@@ -23,7 +23,7 @@
       "group": "Skelett",
       "description": "Kommt im Nether vor und vergiftet Spieler.",
       "image": "Wither_Skeleton.png",
-      "spawnrate": 20,
+      "spawnrate": "20%",
       "lebenspunkte": 20,
       "biom": "Netherfestung"
     },
@@ -32,7 +32,7 @@
       "group": "Boss",
       "description": "",
       "image": "Wither.png",
-      "spawnrate": 100,
+      "spawnrate": "100%",
       "lebenspunkte": 100,
       "biom": "Spawned vom Spieler"
     }
