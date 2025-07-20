@@ -1,227 +1,171 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mob Tracker</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #1e1e1e;
-      color: #f0f0f0;
-      margin: 0;
+      font-family: sans-serif;
+      background-color: #121212;
+      color: white;
       padding: 20px;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .mob-group {
-      margin-bottom: 15px;
-      border: 1px solid #333;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .mob-group-header {
-      background-color: #2e2e2e;
-      padding: 10px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .mob-list {
-      display: none;
-      background-color: #2a2a2a;
-      padding: 10px;
-    }
-
-    .mob-item {
-      display: flex;
-      align-items: center;
+    details {
+      background-color: #1e1e1e;
       margin-bottom: 10px;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    summary {
       cursor: pointer;
-      padding: 5px;
-      transition: background 0.2s;
+      font-weight: bold;
+      font-size: 1.2em;
     }
 
-    .mob-item:hover {
-      background-color: #3a3a3a;
+    .mob-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
     }
 
-    .mob-item img {
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
+    .mob-card {
+      background-color: #2a2a2a;
+      border-radius: 8px;
+      padding: 10px;
+      width: 120px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
     }
 
-    .mob-info {
+    .mob-card:hover {
+      transform: scale(1.05);
+    }
+
+    .mob-card img {
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .info-panel {
+      background-color: #333;
+      border: 1px solid #555;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
       display: none;
-      padding-left: 60px;
-      color: #ccc;
-      font-size: 14px;
     }
 
-    .mob-info.active {
+    .info-panel.active {
       display: block;
+    }
+
+    .info-title {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+
+    .info-content {
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
   <h1>Mob Tracker</h1>
 
-  <div id="mob-container"></div>
+  <!-- Beispielgruppe: Zombie -->
+  <details>
+    <summary>Zombies</summary>
+    <div class="mob-grid">
+      <div class="mob-card" onclick="showInfo('Zombie_in_diamond_armor')">
+        <img src="images/Zombie_in_diamond_armor.png" alt="Zombie in Diamond Armor" />
+        <div>Diamond Armor</div>
+      </div>
+      <div class="mob-card" onclick="showInfo('Zombie_Farmer')">
+        <img src="images/Zombie_Farmer.png" alt="Zombie Farmer" />
+        <div>Farmer</div>
+      </div>
+      <div class="mob-card" onclick="showInfo('Zombie_with_Carved_Pumpkin')">
+        <img src="images/Zombie_with_Carved_Pumpkin.png" alt="Pumpkin Zombie" />
+        <div>Pumpkin</div>
+      </div>
+      <!-- Füge weitere Zombie-Varianten hier ein -->
+    </div>
+  </details>
+
+  <!-- Weitere Gruppen -->
+  <details>
+    <summary>Chicken Jockeys</summary>
+    <div class="mob-grid">
+      <div class="mob-card" onclick="showInfo('Chicken_Swamp_Zombie_Jockey')">
+        <img src="images/Chicken_Swamp_Zombie_Jockey.png" alt="Swamp Chicken Jockey" />
+        <div>Swamp Jockey</div>
+      </div>
+      <div class="mob-card" onclick="showInfo('Chicken_Taiga_Zombie_Jockey')">
+        <img src="images/Chicken_Taiga_Zombie_Jockey.png" alt="Taiga Chicken Jockey" />
+        <div>Taiga Jockey</div>
+      </div>
+      <!-- Weitere Varianten -->
+    </div>
+  </details>
+
+  <!-- Info-Feld -->
+  <div id="infoPanel" class="info-panel">
+    <div class="info-title" id="infoTitle"></div>
+    <div class="info-content" id="infoContent"></div>
+  </div>
 
   <script>
-    const mobs = {
-      "Zombie": [
-        {
-          name: "Zombie_in_chainmail_armor",
-          image: "img/Zombie_in_chainmail_armor.png",
-          biome: "Alle",
-          difficulty: "Normal, Schwer",
-          chance: "Sehr selten"
-        },
-        {
-          name: "Zombie_in_diamond_armor",
-          image: "img/Zombie_in_diamond_armor.png",
-          biome: "Alle",
-          difficulty: "Schwer",
-          chance: "Extrem selten"
-        },
-        {
-          name: "Zombie_in_golden_armor",
-          image: "img/Zombie_in_golden_armor.png",
-          biome: "Alle",
-          difficulty: "Normal, Schwer",
-          chance: "Selten"
-        },
-        {
-          name: "Zombie_in_iron_armor",
-          image: "img/Zombie_in_iron_armor.png",
-          biome: "Alle",
-          difficulty: "Schwer",
-          chance: "Selten"
-        },
-        {
-          name: "Zombie_in_leather_armor",
-          image: "img/Zombie_in_leather_armor.png",
-          biome: "Alle",
-          difficulty: "Leicht, Normal",
-          chance: "Häufig"
-        },
-        {
-          name: "Zombie_Blacksmith",
-          image: "img/Zombie_Blacksmith.png",
-          biome: "Dorf",
-          difficulty: "Alle",
-          chance: "Selten"
-        },
-        {
-          name: "Zombie_Butcher",
-          image: "img/Zombie_Butcher.png",
-          biome: "Dorf",
-          difficulty: "Alle",
-          chance: "Selten"
-        },
-        {
-          name: "Zombie_Farmer",
-          image: "img/Zombie_Farmer.png",
-          biome: "Dorf",
-          difficulty: "Alle",
-          chance: "Selten"
-        },
-        {
-          name: "Zombie_Librarian",
-          image: "img/Zombie_Librarian.png",
-          biome: "Dorf",
-          difficulty: "Alle",
-          chance: "Selten"
-        },
-        {
-          name: "Zombie_Nitwit",
-          image: "img/Zombie_Nitwit.png",
-          biome: "Dorf",
-          difficulty: "Alle",
-          chance: "Selten"
-        },
-        {
-          name: "Zombie_Priest",
-          image: "img/Zombie_Priest.png",
-          biome: "Dorf",
-          difficulty: "Alle",
-          chance: "Selten"
-        },
-        {
-          name: "Zombie_with_Carved_Pumpkin",
-          image: "img/Zombie_with_Carved_Pumpkin.png",
-          biome: "Alle",
-          difficulty: "Alle",
-          chance: "Nur an Halloween"
-        },
-        {
-          name: "Zombie_Villager_with_Carved_Pumpkin",
-          image: "img/Zombie_Villager_with_Carved_Pumpkin.png",
-          biome: "Dorf",
-          difficulty: "Alle",
-          chance: "Nur an Halloween"
-        }
-      ]
-      // Weitere Gruppen kannst du hier hinzufügen
+    const mobData = {
+      Zombie_in_diamond_armor: {
+        name: "Zombie mit Diamantrüstung",
+        biome: "Alle Biome",
+        chance: "Sehr selten",
+        difficulty: "Alle, höhere Chance auf Hard"
+      },
+      Zombie_Farmer: {
+        name: "Zombie Bauer",
+        biome: "Dörfer (Plains, Savanna etc.)",
+        chance: "Mittel",
+        difficulty: "Normal, Hard"
+      },
+      Zombie_with_Carved_Pumpkin: {
+        name: "Zombie mit Kürbis",
+        biome: "Alle Biome (nur Halloween)",
+        chance: "1%", 
+        difficulty: "Alle"
+      },
+      Chicken_Swamp_Zombie_Jockey: {
+        name: "Swamp Chicken Jockey",
+        biome: "Sumpf",
+        chance: "Sehr selten (Baby-Zombie auf Huhn)",
+        difficulty: "Alle"
+      },
+      Chicken_Taiga_Zombie_Jockey: {
+        name: "Taiga Chicken Jockey",
+        biome: "Taiga",
+        chance: "Sehr selten",
+        difficulty: "Alle"
+      },
+      // Weitere Mobs hier eintragen...
     };
 
-    const container = document.getElementById("mob-container");
+    function showInfo(id) {
+      const mob = mobData[id];
+      if (!mob) return;
 
-    for (const groupName in mobs) {
-      const group = mobs[groupName];
+      document.getElementById("infoTitle").innerText = mob.name;
+      document.getElementById("infoContent").innerHTML = `
+        <strong>Biome:</strong> ${mob.biome}<br/>
+        <strong>Spawn-Wahrscheinlichkeit:</strong> ${mob.chance}<br/>
+        <strong>Schwierigkeitsgrad:</strong> ${mob.difficulty}
+      `;
 
-      const groupDiv = document.createElement("div");
-      groupDiv.className = "mob-group";
-
-      const header = document.createElement("div");
-      header.className = "mob-group-header";
-      header.textContent = groupName;
-      header.addEventListener("click", () => {
-        list.style.display = list.style.display === "block" ? "none" : "block";
-      });
-
-      const list = document.createElement("div");
-      list.className = "mob-list";
-
-      group.forEach((mob, index) => {
-        const item = document.createElement("div");
-        item.className = "mob-item";
-
-        const img = document.createElement("img");
-        img.src = mob.image;
-        img.alt = mob.name;
-
-        const name = document.createElement("span");
-        name.textContent = mob.name;
-
-        const info = document.createElement("div");
-        info.className = "mob-info";
-        info.innerHTML = `
-          <strong>Biom:</strong> ${mob.biome}<br>
-          <strong>Spawnchance:</strong> ${mob.chance}<br>
-          <strong>Schwierigkeit:</strong> ${mob.difficulty}
-        `;
-
-        item.appendChild(img);
-        item.appendChild(name);
-        list.appendChild(item);
-        list.appendChild(info);
-
-        item.addEventListener("click", () => {
-          info.classList.toggle("active");
-        });
-      });
-
-      groupDiv.appendChild(header);
-      groupDiv.appendChild(list);
-      container.appendChild(groupDiv);
+      document.getElementById("infoPanel").classList.add("active");
     }
   </script>
 </body>
