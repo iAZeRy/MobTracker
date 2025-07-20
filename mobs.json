@@ -10,15 +10,6 @@
       "biom": "Alle außer Pilzland"
     },
     {
-      "name": "Husk",
-      "group": "Zombie",
-      "description": "Kommt in Wüsten vor und verursacht Hunger.",
-      "image": "husk.png",
-      "spawnrate": 10,
-      "lebenspunkte": 20,
-      "biom": "Wüste"
-    },
-    {
       "name": "Drowned",
       "group": "Zombie",
       "description": "Ein ertrunkener Zombie, der im Wasser spawnt.",
@@ -28,19 +19,10 @@
       "biom": "Flüsse, Ozeane"
     },
     {
-      "name": "Skelett",
-      "group": "Skelett",
-      "description": "Schießt mit Pfeil und Bogen.",
-      "image": "skelett.png",
-      "spawnrate": 80,
-      "lebenspunkte": 20,
-      "biom": "Alle außer Pilzland"
-    },
-    {
       "name": "Wither-Skelett",
       "group": "Skelett",
       "description": "Kommt im Nether vor und vergiftet Spieler.",
-      "image": "witherskelett.png",
+      "image": "Wither_Skeleton.png",
       "spawnrate": 20,
       "lebenspunkte": 20,
       "biom": "Netherfestung"
