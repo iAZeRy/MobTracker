@@ -1,80 +1,67 @@
-const mobData = {
-   "Zombies": [
-    { name: "Zombie", image: "Zombie.png", info: "Spawnt in dunklen Biomen. Wahrscheinlichkeit: Hoch. Schwierigkeit: Alle." },
-    { name: "Zombie_in_diamond_armor", image: "Zombie_in_diamond_armor.png", info: "Sehr selten. Wahrscheinlichkeit: Sehr niedrig. Schwierigkeit: Schwer." },
-    { name: "Zombie_Librarian", image: "Zombie_Librarian.png", info: "Dorfzombie. Wahrscheinlichkeit: Mittel. Schwierigkeit: Normal und Schwer." }
-  ],
-  "Chicken Jockeys": [
-    { name: "Chicken_Zombie_Butcher_Jockey", image: "Chicken_Zombie_Butcher_Jockey.png", info: "Extrem selten. Spawnt in bestimmten Dörfern." },
-    { name: "Chicken_Zombie_Farmer_Jockey", image: "Chicken_Zombie_Farmer_Jockey.png", info: "Sehr selten. Spawnt bei Dorfüberfällen." }
-  ],
-  "Boss Mobs": [
-    { name: "Ender_Dragon", image: "Ender_Dragon.png", info: "Einzigartiger Boss. Spawnt im End. Schwierigkeit: Alle." },
-    { name: "Wither", image: "Wither.png", info: "Manuell beschworen. Schwierigkeit: Alle." }
-  ]
-};
-
-function createMobCard(id, mob) {
-  const card = document.createElement('button');
-  card.className = 'mob-card';
-  card.setAttribute('aria-label', mob.name);
-  card.innerHTML = `
-    <img src="images/${id}.png" alt="${mob.name}" />
-    <div>${mob.name}</div>
-  `;
-  card.onclick = () => showInfo(id);
-  return card;
+async function loadMobs() {
+    const response = await fetch('mobs.json');
+    return await response.json();
 }
 
-function renderMobs() {
-  const mobContent = document.getElementById('mobContent');
-  Object.entries(mobData).forEach(([id, mob]) => {
-    mobContent.appendChild(createMobCard(id, mob));
-  });
-}
-
-function showInfo(id) {
-  const mob = mobData[id];
-  document.getElementById("infoTitle").innerText = mob.name;
-  document.getElementById("infoContent").innerHTML = `
-    <strong>Biome:</strong> ${mob.biome}<br/>
-    <strong>Spawn-Wahrscheinlichkeit:</strong> ${mob.chance}<br/>
-    <strong>Schwierigkeitsgrad:</strong> ${mob.difficulty}
-  `;
-  document.getElementById("infoPanel").classList.add("active");
-}
-
-document.getElementById('closeInfoPanel').onclick = () => {
-  document.getElementById("infoPanel").classList.remove("active");
-};
-
-renderMobs();
-
-const gruppen = {
-  Zombies: [
-    "Zombie_in_diamond_armor",
-    "Zombie_Farmer",
-    "Zombie_with_Carved_Pumpkin"
-  ],
-  "Chicken Jockeys": [
-    "Chicken_Swamp_Zombie_Jockey",
-    "Chicken_Taiga_Zombie_Jockey"
-  ]
-};
-// Erzeugt die Gruppen dynamisch
-for(const [gruppe, mobs] of Object.entries(gruppen)) {
-  // ...
-}
-
-fetch('mobs.json')
-  .then(response => response.json())
-  .then(data => {
-    // Hier kannst du die Daten weiterverarbeiten und z.B. in die Seite einfügen
-    console.log(data);
-    // Beispiel: Alle Mobs auflisten
-    data.mobs.forEach(mob => {
-      // Füge die Infos ins HTML ein
-      // z.B. document.getElementById('mob-list').innerHTML += ...
+function groupMobs(mobs) {
+    const groups = {};
+    mobs.forEach(mob => {
+        if (!groups[mob.group]) groups[mob.group] = [];
+        groups[mob.group].push(mob);
     });
-  })
-  .catch(error => console.error('Fehler beim Laden der JSON:', error));
+    return groups;
+}
+
+function renderGroups(groups) {
+    const mobList = document.getElementById('mobList');
+    mobList.innerHTML = '';
+    for (const group in groups) {
+        const groupSection = document.createElement('section');
+        groupSection.className = 'mob-group';
+        groupSection.innerHTML = `<h2>${group}</h2><div class="mob-group-cards"></div>`;
+        const cardsContainer = groupSection.querySelector('.mob-group-cards');
+        groups[group].forEach(mob => {
+            const card = document.createElement('div');
+            card.className = 'mob-card';
+            card.tabIndex = 0;
+            card.innerText = mob.name;
+            card.addEventListener('click', () => showInfoPanel(mob));
+            cardsContainer.appendChild(card);
+        });
+        mobList.appendChild(groupSection);
+    }
+}
+
+const searchInput = document.createElement('input');
+searchInput.type = 'text';
+searchInput.id = 'mobSearch';
+searchInput.placeholder = 'Mob suchen...';
+document.body.insertBefore(searchInput, document.getElementById('mobList'));
+
+searchInput.addEventListener('input', (e) => {
+    const search = e.target.value.toLowerCase();
+    const filteredMobs = allMobs.filter(mob => 
+        mob.name.toLowerCase().includes(search) || 
+        (mob.group && mob.group.toLowerCase().includes(search))
+    );
+    renderGroups(groupMobs(filteredMobs));
+});
+
+function showInfoPanel(mob) {
+    const panel = document.getElementById('infoPanel');
+    document.getElementById('infoTitle').innerText = mob.name;
+    document.getElementById('infoContent').innerText = mob.description || "Keine Beschreibung.";
+    panel.hidden = false;
+    // Optional: Info-Panel neben die angeklickte Karte positionieren (CSS anpassen)
+}
+document.getElementById('closeInfoPanel').onclick = () => {
+    document.getElementById('infoPanel').hidden = true;
+};
+
+let allMobs = [];
+loadMobs().then(data => {
+    allMobs = data.mobs;
+    renderGroups(groupMobs(allMobs));
+});
+
+// Searchbar-Eventlistener wie oben beschrieben
