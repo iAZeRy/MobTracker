@@ -58,12 +58,6 @@ searchInput.addEventListener('input', (e) => {
 function showInfoPanel(mob) {
   openModal(`<h2>${mob.name}</h2><p>${mob.description || "Keine Beschreibung."}</p>`);
 }
-}
-document.getElementById('closeInfoPanel').onclick = () => {
-    const panel = document.getElementById('infoPanel');
-    panel.classList.remove('active');
-    panel.hidden = true; // optional
-};
 
 let allMobs = [];
 loadMobs().then(data => {
