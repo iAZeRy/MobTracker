@@ -73,3 +73,10 @@ loadMobs().then(data => {
     renderGroups(groupMobs(allMobs));
 });
 
+function openModal(info) {
+  document.getElementById('infotext').innerHTML = info;
+  document.getElementById('infopanel-modal').style.display = 'block';
+}
+function closeModal() {
+  document.getElementById('infopanel-modal').style.display = 'none';
+}
