@@ -79,6 +79,8 @@
 </head>
 <body>
   <h1>Mob Tracker</h1>
+  <div class="main-layout">
+    <div class="mob-content">
 
   <!-- Beispielgruppe: Zombie -->
   <details>
@@ -97,6 +99,12 @@
         <div>Pumpkin</div>
       </div>
       <!-- Füge weitere Zombie-Varianten hier ein -->
+       </div>
+   <div id="infoPanel" class="info-panel" aria-live="polite">
+      <button id="closeInfoPanel" aria-label="Schließen">×</button>
+      <div class="info-title" id="infoTitle"></div>
+      <div class="info-content" id="infoContent"></div>
+    </div>
     </div>
   </details>
 
