@@ -26,6 +26,15 @@
       "spawnrate": 20,
       "lebenspunkte": 20,
       "biom": "Netherfestung"
-    }
+    },
+    {
+      "name": "Wither",
+      "group": "Boss",
+      "description": "Kommt im Nether vor und vergiftet Spieler.",
+      "image": "Wither.png",
+      "spawnrate": 20,
+      "lebenspunkte": 20,
+      "biom": "Netherfestung"
+    },
   ]
 }
