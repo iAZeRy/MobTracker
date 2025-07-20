@@ -6,7 +6,7 @@
       "description": "Ein Standard-Zombie, der nachts erscheint.",
       "image": "Zombie.png",
       "spawnrate": "80%",
-      "lebenspunkte": 20,
+      "lebenspunkte": "20 ♥ × 10",
       "biom": "Alle außer Pilzland"
     },
     {
