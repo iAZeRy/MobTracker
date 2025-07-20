@@ -95,7 +95,7 @@
     "spawnBiome": ["Any Overworld night"],
     "spawnChance": "≈ 0.25 % (ohne Huhn), ≈ 0.4875 % (bei Hühnern)",
     "note": "Jeder Baby‑Zombie hat 5 % Chance, ein Huhn in ca. 10×6×10 zu suchen; wenn keiner da, weitere 5 % Chance → ergibt ca. 0.25 %, bis 0.4875 % mit Hühnern vorhanden." :contentReference[oaicite:1]{index=1}
-  }
+  },
   {
     "name": "Drowned",
     "image": "images/Drowned.png",
