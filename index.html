@@ -30,6 +30,7 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 10px;
+      @media
     }
 
     .mob-card {
@@ -40,6 +41,8 @@
       text-align: center;
       cursor: pointer;
       transition: transform 0.2s;
+      role="button";
+      tabindex="0"
     }
 
     .mob-card:hover {
@@ -114,10 +117,11 @@
   </details>
 
   <!-- Info-Feld -->
-  <div id="infoPanel" class="info-panel">
-    <div class="info-title" id="infoTitle"></div>
-    <div class="info-content" id="infoContent"></div>
-  </div>
+ <div id="infoPanel" class="info-panel" aria-live="polite">
+  <button id="closeInfoPanel" aria-label="Schließen">×</button>
+  <div class="info-title" id="infoTitle"></div>
+  <div class="info-content" id="infoContent"></div>
+</div>
 
   <script>
     const mobData = {
