@@ -32,9 +32,9 @@
       "group": "Boss",
       "description": "",
       "image": "Wither.png",
-      "spawnrate": ,
-      "lebenspunkte": ,
-      "biom": ""
+      "spawnrate": 100,
+      "lebenspunkte": 100,
+      "biom": "Spawned vom Spieler"
     }
   ]
 }
