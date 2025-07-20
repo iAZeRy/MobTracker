@@ -1,5 +1,5 @@
-const mobs = {
-  "Zombies": [
+const mobData = {
+   "Zombies": [
     { name: "Zombie", image: "Zombie.png", info: "Spawnt in dunklen Biomen. Wahrscheinlichkeit: Hoch. Schwierigkeit: Alle." },
     { name: "Zombie_in_diamond_armor", image: "Zombie_in_diamond_armor.png", info: "Sehr selten. Wahrscheinlichkeit: Sehr niedrig. Schwierigkeit: Schwer." },
     { name: "Zombie_Librarian", image: "Zombie_Librarian.png", info: "Dorfzombie. Wahrscheinlichkeit: Mittel. Schwierigkeit: Normal und Schwer." }
@@ -14,50 +14,38 @@ const mobs = {
   ]
 };
 
-const mobList = document.getElementById("mobList");
-const mobInfo = document.getElementById("mobInfo");
-
- const content = document.createElement("div");
-  content.className = "mob-group-content";
-
-  const variants = document.createElement("div");
-  variants.className = "mob-variants";
-
-  const inlineInfo = document.createElement("div");
-  inlineInfo.className = "mob-info-inline";
-  inlineInfo.innerHTML = "<p>Klicke auf einen Mob für Details</p>";
-
-  mobs[groupName].forEach(mob => {
-    const variant = document.createElement("div");
-    variant.className = "mob-variant";
-
-    const img = document.createElement("img");
-    img.src = `images/${mob.image}`;
-    img.alt = mob.name;
-
-    const span = document.createElement("span");
-    span.textContent = mob.name;
-
-    variant.appendChild(img);
-    variant.appendChild(span);
-
-    variant.addEventListener("click", () => {
-      inlineInfo.innerHTML = `
-        <h3>${mob.name.replace(/_/g, " ")}</h3>
-        <img src="images/${mob.image}" style="width: 100px; border-radius: 8px;"><br><br>
-        <strong>Biome:</strong> ${mob.biome || "Unbekannt"}<br>
-        <strong>Spawn-Wahrscheinlichkeit:</strong> ${mob.chance || "Unbekannt"}<br>
-        <strong>Schwierigkeitsgrad:</strong> ${mob.difficulty || "Unbekannt"}
-      `;
-    });
-
-    variants.appendChild(variant);
-  });
-
-  content.appendChild(variants);
-  content.appendChild(inlineInfo);
-
-  group.appendChild(header);
-  group.appendChild(content);
-
+function createMobCard(id, mob) {
+  const card = document.createElement('button');
+  card.className = 'mob-card';
+  card.setAttribute('aria-label', mob.name);
+  card.innerHTML = `
+    <img src="images/${id}.png" alt="${mob.name}" />
+    <div>${mob.name}</div>
+  `;
+  card.onclick = () => showInfo(id);
+  return card;
 }
+
+function renderMobs() {
+  const mobContent = document.getElementById('mobContent');
+  Object.entries(mobData).forEach(([id, mob]) => {
+    mobContent.appendChild(createMobCard(id, mob));
+  });
+}
+
+function showInfo(id) {
+  const mob = mobData[id];
+  document.getElementById("infoTitle").innerText = mob.name;
+  document.getElementById("infoContent").innerHTML = `
+    <strong>Biome:</strong> ${mob.biome}<br/>
+    <strong>Spawn-Wahrscheinlichkeit:</strong> ${mob.chance}<br/>
+    <strong>Schwierigkeitsgrad:</strong> ${mob.difficulty}
+  `;
+  document.getElementById("infoPanel").classList.add("active");
+}
+
+document.getElementById('closeInfoPanel').onclick = () => {
+  document.getElementById("infoPanel").classList.remove("active");
+};
+
+renderMobs();
