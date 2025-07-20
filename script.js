@@ -56,10 +56,8 @@ searchInput.addEventListener('input', (e) => {
 });
 
 function showInfoPanel(mob) {
-    const panel = document.getElementById('infoPanel');
-    document.getElementById('infoTitle').innerText = mob.name;
-    document.getElementById('infoContent').innerText = mob.description || "Keine Beschreibung.";
-    panel.classList.add('active'); // <-- das ist wichtig!
+  openModal(`<h2>${mob.name}</h2><p>${mob.description || "Keine Beschreibung."}</p>`);
+}
 }
 document.getElementById('closeInfoPanel').onclick = () => {
     const panel = document.getElementById('infoPanel');
