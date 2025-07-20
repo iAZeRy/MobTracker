@@ -1,41 +1,42 @@
-<script>
-  // Gruppen öffnen/schließen
-  document.querySelectorAll('.group-toggle').forEach(button => {
-    button.addEventListener('click', () => {
-      const variants = button.nextElementSibling;
-      variants.style.display = variants.style.display === 'flex' ? 'none' : 'flex';
+  const content = document.createElement("div");
+  content.className = "mob-group-content";
+
+  const variants = document.createElement("div");
+  variants.className = "mob-variants";
+
+  const inlineInfo = document.createElement("div");
+  inlineInfo.className = "mob-info-inline";
+  inlineInfo.innerHTML = "<p>Klicke auf einen Mob für Details</p>";
+
+  mobs[groupName].forEach(mob => {
+    const variant = document.createElement("div");
+    variant.className = "mob-variant";
+
+    const img = document.createElement("img");
+    img.src = `images/${mob.image}`;
+    img.alt = mob.name;
+
+    const span = document.createElement("span");
+    span.textContent = mob.name;
+
+    variant.appendChild(img);
+    variant.appendChild(span);
+
+    variant.addEventListener("click", () => {
+      inlineInfo.innerHTML = `
+        <h3>${mob.name.replace(/_/g, " ")}</h3>
+        <img src="images/${mob.image}" style="width: 100px; border-radius: 8px;"><br><br>
+        <strong>Biome:</strong> ${mob.biome || "Unbekannt"}<br>
+        <strong>Spawn-Wahrscheinlichkeit:</strong> ${mob.chance || "Unbekannt"}<br>
+        <strong>Schwierigkeitsgrad:</strong> ${mob.difficulty || "Unbekannt"}
+      `;
     });
+
+    variants.appendChild(variant);
   });
 
-  // Infos ein-/ausblenden
-  function toggleInfo(card) {
-    const infoBox = card.querySelector('.mob-info');
+  content.appendChild(variants);
+  content.appendChild(inlineInfo);
 
-    // Wenn schon offen, schließen
-    if (infoBox.style.display === 'block') {
-      infoBox.style.display = 'none';
-      card.style.transform = 'scale(1)';
-    } else {
-      // Alle anderen schließen
-      document.querySelectorAll('.mob-info').forEach(el => el.style.display = 'none');
-      document.querySelectorAll('.mob-card').forEach(el => el.style.transform = 'scale(1)');
-
-      // Diese öffnen
-      infoBox.style.display = 'block';
-      card.style.transform = 'scale(1.05)';
-    }
-  }
-function toggleGroup(id) {
-  const group = document.getElementById(`group-${id}`);
-  group.style.display = group.style.display === 'block' ? 'none' : 'block';
-}
-
-function toggleInfo(element) {
-  const allVariants = document.querySelectorAll('.mob-variant');
-  allVariants.forEach(v => v.classList.remove('active'));
-  
-  if (!element.classList.contains('active')) {
-    element.classList.add('active');
-  }
-}
-</script>
+  group.appendChild(header);
+  group.appendChild(content);
