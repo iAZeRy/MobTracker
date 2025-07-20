@@ -71,7 +71,3 @@ loadMobs().then(data => {
     renderGroups(groupMobs(allMobs));
 });
 
-const img = document.createElement('img');
-img.src = `images/${mob.image}`;
-img.alt = mob.name;
-card.appendChild(img);
