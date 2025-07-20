@@ -5,7 +5,7 @@
       "group": "Zombie",
       "description": "Ein Standard-Zombie, der nachts erscheint.",
       "image": "Zombie.png",
-      "spawnrate": "80%",
+      "spawnrate": "30-40%",
       "lebenspunkte": "20 ♥ × 10",
       "biom": "Alle außer in Mushroom Fields und Deep Dark"
     },
@@ -14,9 +14,9 @@
       "group": "Zombie",
       "description": "Ein ertrunkener Zombie, der im Wasser spawnt.",
       "image": "Drowned.png",
-      "spawnrate": "10%",
-      "lebenspunkte": 20,
-      "biom": "Flüsse, Ozeane"
+      "spawnrate": "100%",
+      "lebenspunkte": "20 ♥ × 10",
+      "biom": "Ocean, Deep_ocean, Cold_ocean, Deep_cold_ocean, Frozen_ocean, Deep_frozen_ocean, River, Frozen_river"
     },
     {
       "name": "Wither-Skelett",
