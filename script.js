@@ -56,7 +56,7 @@ searchInput.addEventListener('input', (e) => {
 });
 
 function showInfoPanel(mob) {
-    openModal(`<h2>${mob.name}</h2><p>${mob.description || "Keine Beschreibung."}</h3></p>${mob.spawnrate || "Keine Spawnrate."}</p>`);
+    openModal(`<h2>${mob.name}</h2><p>${mob.description || "Keine Beschreibung."}</h2></p>${mob.spawnrate || "Keine Spawnrate."}</p>`);
 }
 
 let allMobs = [];
