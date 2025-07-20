@@ -1,6 +1,35 @@
 {
   "mobs": [
-    { "name": "Zombie", "group": "Zombie", "description": "..." },
-    ...
+    {
+      "name": "Zombie",
+      "group": "Zombie",
+      "description": "Ein Standard-Zombie, der nachts erscheint.",
+      "image": "Zombie.png"
+    },
+    {
+      "name": "Husk",
+      "group": "Zombie",
+      "description": "Kommt in Wüsten vor und verursacht Hunger.",
+      "image": "husk.png"
+    },
+    {
+      "name": "Drowned",
+      "group": "Zombie",
+      "description": "Ein ertrunkener Zombie, der im Wasser spawnt.",
+      "image": "drowned.png"
+    },
+    {
+      "name": "Skelett",
+      "group": "Skelett",
+      "description": "Schießt mit Pfeil und Bogen.",
+      "image": "skelett.png"
+    },
+    {
+      "name": "Wither-Skelett",
+      "group": "Skelett",
+      "description": "Kommt im Nether vor und vergiftet Spieler.",
+      "image": "witherskelett.png"
+    }
+    // ... weitere Mobs
   ]
 }
