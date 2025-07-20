@@ -4,7 +4,7 @@ Eine kleine Web-App, mit der du dir eine Übersicht über Minecraft-Mobs anzeige
 
 ## 🌐 Live ansehen
 
-**👉 [Hier geht’s zur Website (GitHub Pages)]([https://iazery.github.io/MobTracker/])**
+**👉 [Hier geht’s zur Website (GitHub Pages)]([https://iazery.github.io/MobTracker/]) **
 
 ## 📸 Vorschau
 
