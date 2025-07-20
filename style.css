@@ -23,9 +23,10 @@
 .info-panel.active {
   display: block;
 }
-@media (max-width: 900px) {
-  .main-layout {
+@media (max-width: 600px) {
+  .mob-grid {
     flex-direction: column;
+    gap: 20px;
   }
   .info-panel {
     width: 100%;
