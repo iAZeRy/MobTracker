@@ -3,26 +3,18 @@
   align-items: flex-start;
   gap: 30px;
 }
-.mob-content {
+#mobList {
   flex: 1;
 }
-/* Make the info panel fixed in width and stick to the right */
 .info-panel {
-  background-color: #333;
-  border: 1px solid #555;
-  padding: 15px;
-  border-radius: 10px;
   width: 320px;
-  min-height: 120px;
-  max-width: 100%;
-  margin: 0;
-  display: none;
-  position: sticky;
-  top: 30px;
+  /* weitere Styles wie background, border etc. */
 }
+
 .info-panel.active {
   display: block;
 }
+
 @media (max-width: 600px) {
   .mob-grid {
     flex-direction: column;
