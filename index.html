@@ -82,52 +82,8 @@
     <div class="info-title" id="infoTitle"></div>
     <div class="info-content" id="infoContent"></div>
   </div>
-  <script src="main.js"></script>
-
-  <!-- Beispielgruppe: Zombie -->
-  <details>
-    <summary>Zombies</summary>
-    <div class="mob-grid">
-      <div class="mob-card" onclick="showInfo('Zombie_in_diamond_armor')">
-        <img src="images/Zombie_in_diamond_armor.png" alt="Zombie in Diamond Armor" />
-        <div>Diamond Armor</div>
-      </div>
-      <div class="mob-card" onclick="showInfo('Zombie_Farmer')">
-        <img src="images/Zombie_Farmer.png" alt="Zombie Farmer" />
-        <div>Farmer</div>
-      </div>
-      <div class="mob-card" onclick="showInfo('Zombie_with_Carved_Pumpkin')">
-        <img src="images/Zombie_with_Carved_Pumpkin.png" alt="Pumpkin Zombie" />
-        <div>Pumpkin</div>
-      </div>
-      <!-- Füge weitere Zombie-Varianten hier ein -->
-       </div>
-    </div>
-  </details>
-
-  <!-- Weitere Gruppen -->
-  <details>
-    <summary>Chicken Jockeys</summary>
-    <div class="mob-grid">
-      <div class="mob-card" onclick="showInfo('Chicken_Swamp_Zombie_Jockey')">
-        <img src="images/Chicken_Swamp_Zombie_Jockey.png" alt="Swamp Chicken Jockey" />
-        <div>Swamp Jockey</div>
-      </div>
-      <div class="mob-card" onclick="showInfo('Chicken_Taiga_Zombie_Jockey')">
-        <img src="images/Chicken_Taiga_Zombie_Jockey.png" alt="Taiga Chicken Jockey" />
-        <div>Taiga Jockey</div>
-      </div>
-      <!-- Weitere Varianten -->
-    </div>
-  </details>
-
-  <!-- Info-Feld -->
- <div id="infoPanel" class="info-panel" aria-live="polite">
-      <button id="closeInfoPanel" aria-label="Schließen">×</button>
-      <div class="info-title" id="infoTitle"></div>
-      <div class="info-content" id="infoContent"></div>
-    </div>
- 
+  <script src="script.js"></script>
+  
   <div class="mob-card" tabindex="0" role="button" aria-label="Diamond Armor Zombie"
      onkeydown="if(event.key==='Enter'||event.key===' '){showInfo('Zombie_in_diamond_armor')}"
      onclick="showInfo('Zombie_in_diamond_armor')">
@@ -135,4 +91,5 @@
 </div>
   <div id="mob-list"></div>
 </body>
+  <main id="mobList"></main>
 </html>
