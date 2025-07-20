@@ -25,4 +25,17 @@
       card.style.transform = 'scale(1.05)';
     }
   }
+function toggleGroup(id) {
+  const group = document.getElementById(`group-${id}`);
+  group.style.display = group.style.display === 'block' ? 'none' : 'block';
+}
+
+function toggleInfo(element) {
+  const allVariants = document.querySelectorAll('.mob-variant');
+  allVariants.forEach(v => v.classList.remove('active'));
+  
+  if (!element.classList.contains('active')) {
+    element.classList.add('active');
+  }
+}
 </script>
