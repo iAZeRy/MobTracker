@@ -5,8 +5,8 @@
       "group": "Zombie",
       "description": "Ein Standard-Zombie, der nachts erscheint.",
       "image": "Zombie.png",
-      "spawnrate": "Spawnrate: 80%",
-      "lebenspunkte": "HP: 20",
+      "spawnrate": Spawnrate: 80%,
+      "lebenspunkte": HP: 20,
       "biom": "Biom: Alle außer Pilzland"
     },
     {
