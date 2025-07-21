@@ -90,5 +90,14 @@
       "lebenspunkte": "14 ♥ × 7",
       "biom": "Warm Ocean Ruins"
     },
+    {
+      "name": "Strider",
+      "group": "Passive Mobs",
+      "description": "Strider können über Lava laufen und erhalten durch sie keinen Schaden.",
+      "image": "Strider.png",
+      "spawnrate": "100%",
+      "lebenspunkte": "20 ♥ × 10",
+      "biom": "Lava sea, Delta, Nether Wastes, Crimson Forest, Warped Forest, Soul Sand Valley, Basalt Deltas"
+    },
   ]
 }
