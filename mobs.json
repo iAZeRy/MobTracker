@@ -85,7 +85,7 @@
       "name": "Sniffer",
       "group": "Passive Mobs",
       "description": "Sniffer können nur durch ein Snifferegg ausgebrütet werden.",
-      "image": "Bat.png",
+      "image": "Sniffer.png",
       "spawnrate": "100%",
       "lebenspunkte": "14 ♥ × 7",
       "biom": "Warm Ocean Ruins"
