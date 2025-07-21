@@ -1,4 +1,4 @@
-# 🧟 MobDex – Minecraft Mob Datenbank
+# 🧟 MobTracker – Minecraft Mob Datenbank
 
 Eine kleine Web-App, mit der du dir eine Übersicht über Minecraft-Mobs anzeigen lassen kannst – sortiert nach Gruppen. Beim Klicken auf einen Mob erscheinen rechts alle relevanten Informationen wie Spawnrate, Biom, Lebenspunkte und ein Bild.
 
