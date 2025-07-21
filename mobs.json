@@ -98,6 +98,15 @@
       "spawnrate": "100%",
       "lebenspunkte": "20 ♥ × 10",
       "biom": "Lava sea, Delta, Nether Wastes, Crimson Forest, Warped Forest, Soul Sand Valley, Basalt Deltas"
+    },
+    {
+      "name": "Cod",
+      "group": "Fisch",
+      "description": "Der Kabeljau ist ein friedlicher Fisch, der in Schwärmen im Ozean umherschwimmt. 1 Knochenmehl (5% Wahrscheinlichkeit).",
+      "image": "Cod.png",
+      "spawnrate": "100%",
+      "lebenspunkte": "3",
+      "biom": "Kalter Ozean, Kalte Tiefsee, Lauwarmer Ozean, Lauwarme Tiefsee, Ozean, Tiefsee"
     }
   ]
 }
