@@ -53,6 +53,15 @@
       "spawnrate": "100%",
       "lebenspunkte": 500,
       "biom": "Deep Dark"
-    }
+    },
+    {
+      "name": "Armadillo",
+      "group": "Friendly Mob",
+      "description": "Hat Angst vor Zombies",
+      "image": "Armadillo.png",
+      "spawnrate": "100%",
+      "lebenspunkte": 10,
+      "biom": "Savanne"
+    },
   ]
 }
