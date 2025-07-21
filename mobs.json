@@ -71,6 +71,15 @@
       "spawnrate": "50%",
       "lebenspunkte": "20 ♥ × 10",
       "biom": "Pillager Outpost, Woodland Mansion"
+    },
+    {
+      "name": "Bat",
+      "group": "Passive Mobs",
+      "description": "Nur unterhalb Ebene 63, Unter Lichtlevel 4",
+      "image": "Bat.png",
+      "spawnrate": "100%",
+      "lebenspunkte": "6",
+      "biom": "Caves"
     }
   ]
 }
