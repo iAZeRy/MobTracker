@@ -56,12 +56,12 @@
     },
     {
       "name": "Armadillo",
-      "group": "Friendly Mob",
+      "group": "Passive Mobs",
       "description": "Hat Angst vor Zombies",
       "image": "Armadillo.png",
       "spawnrate": "100%",
-      "lebenspunkte": 10,
-      "biom": "Savanne"
+      "lebenspunkte": 6,
+      "biom": "Savanna, Savanna Plateau, Windswept Savanna and groups of one or two in Badlands, Eroded Badlands, and Wooded Badlands"
     },
   ]
 }
