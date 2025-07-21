@@ -62,6 +62,15 @@
       "spawnrate": "100%",
       "lebenspunkte": 6,
       "biom": "Savanna, Savanna Plateau, Windswept Savanna and groups of one or two in Badlands, Eroded Badlands, and Wooded Badlands"
+    },
+    {
+      "name": "Armadillo",
+      "group": "Passive Mobs",
+      "description": "Hilfsgeister Können tanzen, wenn ein Plattenspieler spielt.",
+      "image": "Allay.png",
+      "spawnrate": "50%",
+      "lebenspunkte": "20 ♥ × 10",
+      "biom": "Pillager Outpost, Woodland Mansion"
     }
   ]
 }
