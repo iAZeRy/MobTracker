@@ -45,7 +45,7 @@ function applyFilters() {
         filtered.sort((a, b) => avg(b.spawnrate) - avg(a.spawnrate));
     }
 
-    renderGroups(groupMobs(filtered));
+    filterAndRenderMobs(); // ← Zeigt direkt alles an + reagiert auf Suche/Filter
 }
 
 function groupMobs(mobs) {
