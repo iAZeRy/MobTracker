@@ -89,13 +89,10 @@ const mobList = document.getElementById('mobList');
 mobList.parentNode.insertBefore(searchInput, mobList);
 
 searchInput.addEventListener('input', (e) => {
-    const search = e.target.value.toLowerCase();
-    const filteredMobs = allMobs.filter(mob => 
-        mob.name.toLowerCase().includes(search) || 
-        (mob.group && mob.group.toLowerCase().includes(search))
-    );
-    renderGroups(groupMobs(filteredMobs));
+    currentSearch = e.target.value.toLowerCase();
+    applyFilters();
 });
+
 
 function showInfoPanel(mob) {
     openModal(`
@@ -120,3 +117,13 @@ function openModal(info) {
 function closeModal() {
     document.getElementById('infopanel-modal').style.display = 'none';
 }
+
+document.getElementById('filterSelect').addEventListener('change', e => {
+    currentGroupFilter = e.target.value;
+    applyFilters();
+});
+
+document.getElementById('sortSelect').addEventListener('change', e => {
+    currentSortKey = e.target.value;
+    applyFilters();
+});
