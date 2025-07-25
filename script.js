@@ -1,8 +1,16 @@
 async function loadMobs() {
-  const response = await fetch("mobs.json");
-  mobs = await response.json();
-  filterAndRenderMobs(); // ← zeigt direkt alle Mobs, reagiert auf Suche, Sortierung und Filter
+    try {
+        const response = await fetch('mobs.json');
+        if (!response.ok) throw new Error('Datei konnte nicht geladen werden.');
+        const data = await response.json();
+        allMobs = data.mobs;
+        filterAndRenderMobs(); // Direktes Rendering nach dem Laden
+    } catch (error) {
+        console.error('Fehler beim Laden der Mobs:', error);
+        alert('Es gab einen Fehler beim Laden der Mobs. Bitte versuche es später erneut.');
+    }
 }
+
 
 
 // Aktueller Filter- und Suchzustand
@@ -95,8 +103,11 @@ const searchInput = document.createElement('input');
 searchInput.type = 'text';
 searchInput.id = 'mobSearch';
 searchInput.placeholder = 'Mob suchen...';
-const mobList = document.getElementById('mobList');
-mobList.parentNode.insertBefore(searchInput, mobList);
+searchInput.style.marginRight = '20px';
+
+// Füge das Suchfeld direkt vor den Steuerungen ein
+const controls = document.getElementById('controls');
+controls.parentNode.insertBefore(searchInput, controls);
 
 searchInput.addEventListener('input', (e) => {
     currentSearch = e.target.value.toLowerCase();
@@ -114,10 +125,10 @@ function showInfoPanel(mob) {
     `);
 }
 
-let allMobs = [];
+let allMobs = [];  // Alle Mobs, die nach dem Laden gefiltert und angezeigt werden
 loadMobs().then(data => {
     allMobs = data.mobs;
-    filterAndRenderMobs(); // Sicherstellen, dass beim Laden direkt gefiltert und gerendert wird
+    filterAndRenderMobs();  // Zuerst alle Mobs anzeigen
 });
 
 function openModal(info) {
@@ -137,3 +148,10 @@ document.getElementById('sortSelect').addEventListener('change', e => {
     currentSortKey = e.target.value;
     applyFilters();
 });
+
+function filterAndRenderMobs() {
+    let filteredMobs = allMobs;
+    // Wende Filter an
+    applyFilters(filteredMobs);
+    renderGroups(groupMobs(filteredMobs)); // Zeige gefilterte und gruppierte Mobs an
+}
