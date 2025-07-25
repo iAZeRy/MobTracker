@@ -96,13 +96,6 @@ function renderGroups(groups) {
     }
 }
 
-
-const searchInput = document.createElement('input');
-searchInput.type = 'text';
-searchInput.id = 'mobSearch';
-searchInput.placeholder = 'Mob suchen...';
-searchInput.style.marginRight = '20px';
-
 // Füge das Suchfeld direkt vor den Steuerungen ein
 const controls = document.getElementById('controls');
 controls.parentNode.insertBefore(searchInput, controls);
