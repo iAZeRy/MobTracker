@@ -11,8 +11,6 @@ async function loadMobs() {
     }
 }
 
-
-
 // Aktueller Filter- und Suchzustand
 let currentGroupFilter = 'all';
 let currentSortKey = '';
@@ -125,10 +123,8 @@ function showInfoPanel(mob) {
     `);
 }
 
-let allMobs = [];  // Alle Mobs, die nach dem Laden gefiltert und angezeigt werden
-loadMobs().then(data => {
-    allMobs = data.mobs;
-    filterAndRenderMobs();  // Zuerst alle Mobs anzeigen
+let allMobs = [];
+loadMobs();  // ✅ nur das hier
 });
 
 function openModal(info) {
@@ -150,8 +146,6 @@ document.getElementById('sortSelect').addEventListener('change', e => {
 });
 
 function filterAndRenderMobs() {
-    let filteredMobs = allMobs;
-    // Wende Filter an
-    applyFilters(filteredMobs);
-    renderGroups(groupMobs(filteredMobs)); // Zeige gefilterte und gruppierte Mobs an
+    applyFilters();  // Mehr braucht es nicht
 }
+
