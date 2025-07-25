@@ -125,7 +125,6 @@ function showInfoPanel(mob) {
 
 let allMobs = [];
 loadMobs(); 
-});
 
 function openModal(info) {
     document.getElementById('infotext').innerHTML = info;
