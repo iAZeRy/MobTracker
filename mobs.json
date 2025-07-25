@@ -1,14 +1,19 @@
 {
   "mobs": [
     {
-      "name": "Zombie",
-      "group": "Zombie",
-      "description": "Ein Standard-Zombie, der nachts erscheint.",
-      "image": "Zombie.png",
-      "spawnrate": "30-40%",
-      "lebenspunkte": "20 ♥ × 10",
-      "biom": "Alle außer in Mushroom Fields und Deep Dark"
-    },
+  "name": "Zombie",
+  "group": "Zombie",
+  "description": "Ein Standard-Zombie, der nachts erscheint.",
+  "image": "Zombie.png",
+  "spawnrate": "30-40%",
+  "lebenspunkte": "20 ♥ × 10",
+  "biom": "Alle außer Mushroom Fields und Deep Dark",
+  "verhalten": "Aggressiv",
+  "angriff": "2 ♥",
+  "xp": "5 XP",
+  "drops": ["Verrottetes Fleisch", "Eisenbarren (selten)"],
+  "spawnzeit": "Nur nachts"
+},
     {
       "name": "Drowned",
       "group": "Zombie",
