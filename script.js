@@ -1,6 +1,9 @@
 async function loadMobs() {
     const response = await fetch('mobs.json');
     return await response.json();
+    mobs = await response.json();
+const groupedMobs = groupMobs(mobs);
+renderGroups(groupedMobs);
 }
 
 // Aktueller Filter- und Suchzustand
