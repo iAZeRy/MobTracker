@@ -96,16 +96,6 @@ function renderGroups(groups) {
     }
 }
 
-// Füge das Suchfeld direkt vor den Steuerungen ein
-const controls = document.getElementById('controls');
-controls.parentNode.insertBefore(searchInput, controls);
-
-searchInput.addEventListener('input', (e) => {
-    currentSearch = e.target.value.toLowerCase();
-    applyFilters();
-});
-
-
 function showInfoPanel(mob) {
     openModal(`
         <h2>${mob.name}</h2>
