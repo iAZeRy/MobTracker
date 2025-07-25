@@ -3,6 +3,48 @@ async function loadMobs() {
     return await response.json();
 }
 
+// Aktueller Filter- und Suchzustand
+let currentGroupFilter = 'all';
+let currentSortKey = '';
+let currentSearch = '';
+
+// Filter und sortiere Mobs
+function applyFilters() {
+    let filtered = allMobs;
+
+    // Suche
+    if (currentSearch) {
+        filtered = filtered.filter(mob =>
+            mob.name.toLowerCase().includes(currentSearch) ||
+            (mob.group && mob.group.toLowerCase().includes(currentSearch))
+        );
+    }
+
+    // Gruppenfilter
+    if (currentGroupFilter !== 'all') {
+        filtered = filtered.filter(mob => mob.group === currentGroupFilter);
+    }
+
+    // Sortierung
+    if (currentSortKey === 'name') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (currentSortKey === 'lebenspunkte') {
+        const getHP = str => parseInt(str?.match(/\d+/)?.[0] || 0);
+        filtered.sort((a, b) => getHP(b.lebenspunkte) - getHP(a.lebenspunkte));
+    } else if (currentSortKey === 'spawnrate') {
+        const avg = val => {
+            const match = val?.match(/(\d+)-?(\d+)?/);
+            if (!match) return 0;
+            const min = parseInt(match[1]);
+            const max = match[2] ? parseInt(match[2]) : min;
+            return (min + max) / 2;
+        };
+        filtered.sort((a, b) => avg(b.spawnrate) - avg(a.spawnrate));
+    }
+
+    renderGroups(groupMobs(filtered));
+}
+
 function groupMobs(mobs) {
     const groups = {};
     mobs.forEach(mob => {
