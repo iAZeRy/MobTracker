@@ -62,13 +62,16 @@
 </head>
 <body>
   <h1>Mob Tracker</h1>
-   <!-- MODAL INFOPANEL -->
+
+  <!-- MODAL INFOPANEL -->
   <div id="infopanel-modal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <div id="infotext"></div>
+    </div>
+  </div>
 
-    <!-- FILTER- UND SORTIERMENÜ -->
+  <!-- FILTER- UND SORTIERMENÜ -->
   <div id="controls" style="margin: 20px 0;">
     <label for="filterSelect">Gruppe:</label>
     <select id="filterSelect">
@@ -76,7 +79,6 @@
       <option value="Zombie">Zombie</option>
       <option value="Tier">Tier</option>
       <option value="Nether">Nether</option>
-      <!-- weitere Gruppen nach Bedarf -->
     </select>
 
     <label for="sortSelect" style="margin-left: 20px;">Sortieren nach:</label>
@@ -87,8 +89,13 @@
       <option value="spawnrate">Spawnrate</option>
     </select>
   </div>
+
+  <!-- Suchfeld -->
+  <input type="text" id="mobSearch" placeholder="Mob suchen..." />
+
+  <!-- Mobs anzeigen -->
   <div id="mobList"></div>
+
   <script src="script.js"></script>
-  </div>
 </body>
 </html>
