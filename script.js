@@ -1,10 +1,9 @@
 async function loadMobs() {
-    const response = await fetch('mobs.json');
-    return await response.json();
-    mobs = await response.json();
-const groupedMobs = groupMobs(mobs);
-renderGroups(groupedMobs);
+  const response = await fetch("mobs.json");
+  mobs = await response.json();
+  filterAndRenderMobs(); // ← zeigt direkt alle Mobs, reagiert auf Suche, Sortierung und Filter
 }
+
 
 // Aktueller Filter- und Suchzustand
 let currentGroupFilter = 'all';
@@ -45,7 +44,7 @@ function applyFilters() {
         filtered.sort((a, b) => avg(b.spawnrate) - avg(a.spawnrate));
     }
 
-    filterAndRenderMobs(); // ← Zeigt direkt alles an + reagiert auf Suche/Filter
+    renderGroups(groupedMobs);
 }
 
 function groupMobs(mobs) {
