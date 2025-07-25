@@ -10,7 +10,6 @@ let currentGroupFilter = 'all';
 let currentSortKey = '';
 let currentSearch = '';
 
-// Filter und sortiere Mobs
 function applyFilters() {
     let filtered = allMobs;
 
@@ -44,8 +43,10 @@ function applyFilters() {
         filtered.sort((a, b) => avg(b.spawnrate) - avg(a.spawnrate));
     }
 
-    renderGroups(groupedMobs);
+    // Die gruppierten Mobs rendern
+    renderGroups(groupMobs(filtered));
 }
+
 
 function groupMobs(mobs) {
     const groups = {};
@@ -58,7 +59,13 @@ function groupMobs(mobs) {
 
 function renderGroups(groups) {
     const mobList = document.getElementById('mobList');
-    mobList.innerHTML = '';
+    mobList.innerHTML = ''; // Zuerst leeren
+
+    if (Object.keys(groups).length === 0) {
+        mobList.innerHTML = '<p>Keine Mobs gefunden.</p>';
+        return;
+    }
+
     for (const group in groups) {
         const groupSection = document.createElement('section');
         groupSection.className = 'mob-group';
@@ -82,6 +89,7 @@ function renderGroups(groups) {
         mobList.appendChild(groupSection);
     }
 }
+
 
 const searchInput = document.createElement('input');
 searchInput.type = 'text';
@@ -109,7 +117,7 @@ function showInfoPanel(mob) {
 let allMobs = [];
 loadMobs().then(data => {
     allMobs = data.mobs;
-    renderGroups(groupMobs(allMobs));
+    filterAndRenderMobs(); // Sicherstellen, dass beim Laden direkt gefiltert und gerendert wird
 });
 
 function openModal(info) {
