@@ -38,21 +38,21 @@ body {
 
 #mobSearch {
   width: 300px;
-  padding: 10px 14px;
+  padding: 8px 0;
   border: none;
-  border-radius: 8px;
-  background: #222;
+  border-bottom: 2px solid #555;
+  background: transparent;
   color: #fff;
   font-size: 1em;
   margin-bottom: 24px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   outline: none;
-  transition: background 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s;
 }
+
 #mobSearch:focus {
-  background: #333;
-  box-shadow: 0 0 0 2px #0099ff;
+  border-bottom: 2px solid #0099ff;
 }
+
 .modal-content {
   background: #333;
   margin: 10% auto;
