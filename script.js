@@ -124,7 +124,7 @@ function showInfoPanel(mob) {
 }
 
 let allMobs = [];
-loadMobs(mobs.json);  // ✅ nur das hier
+loadMobs(); 
 });
 
 function openModal(info) {
