@@ -2,100 +2,507 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Minecraft Mob Tracker - Verwalte und durchsuche Minecraft Mobs" />
   <title>Mob Tracker</title>
   <style>
+    :root {
+      --bg-primary: #121212;
+      --bg-secondary: #2a2a2a;
+      --bg-modal: #333;
+      --text-primary: #ffffff;
+      --text-secondary: #cccccc;
+      --accent-color: #4CAF50;
+      --border-radius: 8px;
+      --transition: all 0.2s ease;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: sans-serif;
-      background-color: #121212;
-      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
       padding: 20px;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--accent-color);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Controls Section */
+    .controls {
+      background-color: var(--bg-secondary);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    label {
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    select, input[type="text"] {
+      padding: 8px 12px;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 14px;
+      transition: var(--transition);
+      min-width: 150px;
+    }
+
+    select:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+
+    .search-container {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    #mobSearch {
+      width: 100%;
+      min-width: unset;
+    }
+
+    /* Mob Grid */
+    .mob-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
     }
 
     .mob-card {
-      background-color: #2a2a2a;
-      border-radius: 8px;
-      padding: 20px;
-      width: 120px;
+      background-color: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      padding: 16px;
       text-align: center;
       cursor: pointer;
-      transition: transform 0.2s;
-      margin: 8px;
-      display: inline-block;
-      vertical-align: top;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      border: 2px solid transparent;
     }
 
     .mob-card:hover {
-      transform: scale(1.05);
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      border-color: var(--accent-color);
+    }
+
+    .mob-card:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
     }
 
     .mob-card img {
       width: 100%;
+      height: 80px;
+      object-fit: cover;
       border-radius: 4px;
+      margin-bottom: 8px;
+      background-color: var(--bg-primary);
     }
 
-    /* MODAL STYLES */
+    .mob-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .mob-type {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      background-color: var(--bg-primary);
+      padding: 2px 8px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    /* Modal Styles */
     .modal {
       display: none;
       position: fixed;
       z-index: 1000;
-      left: 0; top: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4);
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
     }
+
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .modal-content {
-      background: #333;
-      margin: 10% auto;
-      padding: 24px 24px 16px 24px;
-      border-radius: 10px;
-      width: 350px;
+      background: var(--bg-modal);
+      padding: 24px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
       position: relative;
       text-align: center;
-      color: #fff;
+      color: var(--text-primary);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      animation: modalSlideIn 0.3s ease;
     }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
     .close {
       position: absolute;
-      right: 18px; top: 12px;
-      font-size: 28px;
+      right: 16px;
+      top: 16px;
+      font-size: 24px;
       cursor: pointer;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .close:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    .no-results {
+      text-align: center;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin: 40px 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .form-group {
+        width: 100%;
+      }
+
+      select, input[type="text"] {
+        min-width: unset;
+        width: 100%;
+      }
+
+      .mob-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+      }
+
+      .modal-content {
+        margin: 20px;
+        width: calc(100% - 40px);
+      }
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      color: var(--text-secondary);
+      margin: 40px 0;
+    }
+
+    .loading::after {
+      content: "...";
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0%, 20% { content: "."; }
+      40% { content: ".."; }
+      60%, 100% { content: "..."; }
     }
   </style>
 </head>
 <body>
-  <h1>Mob Tracker</h1>
+  <div class="container">
+    <header>
+      <h1>🧟 Mob Tracker</h1>
+    </header>
 
-  <!-- MODAL INFOPANEL -->
-  <div id="infopanel-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <div id="infotext"></div>
-    </div>
+    <main>
+      <!-- Modal für Mob-Informationen -->
+      <div id="infopanel-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-content">
+          <button class="close" onclick="closeModal()" aria-label="Schließen">&times;</button>
+          <div id="infotext" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- Filter- und Suchbereich -->
+      <section class="controls" aria-label="Filter und Suche">
+        <div class="filter-row">
+          <div class="form-group">
+            <label for="filterSelect">Gruppe:</label>
+            <select id="filterSelect" aria-describedby="filter-help">
+              <option value="all">Alle Gruppen</option>
+              <option value="Zombie">Zombie</option>
+              <option value="Skelett">Skelett</option>
+              <option value="Boss">Boss</option>
+              <option value="Tier">Tier</option>
+              <option value="Monster">Monster</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sortSelect">Sortieren nach:</label>
+            <select id="sortSelect" aria-describedby="sort-help">
+              <option value="">Keine Sortierung</option>
+              <option value="name">Name (A–Z)</option>
+              <option value="lebenspunkte">Lebenspunkte</option>
+              <option value="spawnrate">Spawnrate</option>
+            </select>
+          </div>
+
+          <div class="form-group search-container">
+            <label for="mobSearch">Suche:</label>
+            <input type="text" id="mobSearch" placeholder="Mob suchen..." aria-describedby="search-help" />
+          </div>
+        </div>
+        
+        <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 10px;">
+          <span id="results-count">0 Mobs gefunden</span>
+        </div>
+      </section>
+
+      <!-- Mob-Liste -->
+      <section id="mobList" class="mob-grid" aria-label="Mob-Liste" role="grid"></section>
+    </main>
   </div>
 
-  <!-- FILTER- UND SORTIERMENÜ -->
-  <div id="controls" style="margin: 20px 0;">
-    <label for="filterSelect">Gruppe:</label>
-    <select id="filterSelect">
-      <option value="all">Alle Gruppen</option>
-      <option value="Zombie">Zombie</option>
-      <option value="Skelett">Skelett</option>
-      <option value="Boss">Boss</option>
-    </select>
+  <script>
+    // Beispiel-Daten (normalerweise würdest du diese aus einer JSON-Datei laden)
+    const mobData = [
+      {
+        id: 1,
+        name: "Zombie",
+        typ: "Monster",
+        lebenspunkte: 20,
+        spawnrate: "Häufig",
+        bild: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjNENBRjUwIi8+Cjx0ZXh0IHg9IjMyIiB5PSIzNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTIiPvCfp58gPC90ZXh0Pgo8L3N2Zz4K",
+        beschreibung: "Ein untotes Monster, das in der Nacht spawnt."
+      },
+      {
+        id: 2,
+        name: "Skelett",
+        typ: "Monster",
+        lebenspunkte: 20,
+        spawnrate: "Häufig",
+        bild: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRkY5ODAwIi8+Cjx0ZXh0IHg9IjMyIiB5PSIzNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTIiPvCfkao8L3RleHQ+Cjwvc3ZnPgo=",
+        beschreibung: "Ein Bogenschütze, der aus der Ferne angreift."
+      },
+      {
+        id: 3,
+        name: "Enderdrache",
+        typ: "Boss",
+        lebenspunkte: 200,
+        spawnrate: "Einmalig",
+        bild: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjOUMyN0IwIi8+Cjx0ZXh0IHg9IjMyIiB5PSIzNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTIiPvCfkYk8L3RleHQ+Cjwvc3ZnPgo=",
+        beschreibung: "Der mächtigste Boss im End-Dimension."
+      }
+    ];
 
-    <label for="sortSelect" style="margin-left: 20px;">Sortieren nach:</label>
-    <select id="sortSelect">
-      <option value="">Keine Sortierung</option>
-      <option value="name">Name (A–Z)</option>
-      <option value="lebenspunkte">Lebenspunkte</option>
-      <option value="spawnrate">Spawnrate</option>
-    </select>
-  </div>
+    let filteredMobs = [...mobData];
+    let currentFilter = 'all';
+    let currentSort = '';
+    let searchTerm = '';
 
-  <!-- Suchfeld -->
-  <input type="text" id="mobSearch" placeholder="Mob suchen..." />
+    // DOM-Elemente
+    const mobList = document.getElementById('mobList');
+    const filterSelect = document.getElementById('filterSelect');
+    const sortSelect = document.getElementById('sortSelect');
+    const searchInput = document.getElementById('mobSearch');
+    const modal = document.getElementById('infopanel-modal');
+    const resultsCount = document.getElementById('results-count');
 
-  <!-- Mobs anzeigen -->
-  <div id="mobList"></div>
+    // Event-Listener
+    filterSelect.addEventListener('change', handleFilter);
+    sortSelect.addEventListener('change', handleSort);
+    searchInput.addEventListener('input', handleSearch);
+    
+    // Modal mit ESC schließen
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('show')) {
+        closeModal();
+      }
+    });
 
-  <script src="script.js"></script>
+    // Modal bei Klick außerhalb schließen
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    function handleFilter() {
+      currentFilter = filterSelect.value;
+      updateMobList();
+    }
+
+    function handleSort() {
+      currentSort = sortSelect.value;
+      updateMobList();
+    }
+
+    function handleSearch() {
+      searchTerm = searchInput.value.toLowerCase().trim();
+      updateMobList();
+    }
+
+    function updateMobList() {
+      // Filtern
+      filteredMobs = mobData.filter(mob => {
+        const matchesFilter = currentFilter === 'all' || mob.typ === currentFilter;
+        const matchesSearch = searchTerm === '' || 
+          mob.name.toLowerCase().includes(searchTerm) ||
+          mob.typ.toLowerCase().includes(searchTerm);
+        
+        return matchesFilter && matchesSearch;
+      });
+
+      // Sortieren
+      if (currentSort) {
+        filteredMobs.sort((a, b) => {
+          if (currentSort === 'name') {
+            return a.name.localeCompare(b.name);
+          } else if (currentSort === 'lebenspunkte') {
+            return b.lebenspunkte - a.lebenspunkte;
+          } else if (currentSort === 'spawnrate') {
+            const spawnOrder = { 'Häufig': 3, 'Selten': 2, 'Einmalig': 1 };
+            return (spawnOrder[b.spawnrate] || 0) - (spawnOrder[a.spawnrate] || 0);
+          }
+          return 0;
+        });
+      }
+
+      renderMobs();
+      updateResultsCount();
+    }
+
+    function renderMobs() {
+      if (filteredMobs.length === 0) {
+        mobList.innerHTML = '<div class="no-results">Keine Mobs gefunden. Versuche andere Suchkriterien.</div>';
+        return;
+      }
+
+      mobList.innerHTML = filteredMobs.map(mob => `
+        <div class="mob-card" 
+             tabindex="0" 
+             role="gridcell"
+             onclick="showMobInfo(${mob.id})"
+             onkeydown="handleCardKeydown(event, ${mob.id})"
+             aria-label="Mob-Karte für ${mob.name}">
+          <img src="${mob.bild}" alt="Bild von ${mob.name}" loading="lazy" />
+          <div class="mob-name">${mob.name}</div>
+          <div class="mob-type">${mob.typ}</div>
+        </div>
+      `).join('');
+    }
+
+    function handleCardKeydown(event, mobId) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        showMobInfo(mobId);
+      }
+    }
+
+    function updateResultsCount() {
+      const count = filteredMobs.length;
+      resultsCount.textContent = `${count} Mob${count !== 1 ? 's' : ''} gefunden`;
+    }
+
+    function showMobInfo(mobId) {
+      const mob = mobData.find(m => m.id === mobId);
+      if (!mob) return;
+
+      const infoText = document.getElementById('infotext');
+      infoText.innerHTML = `
+        <h2 id="modal-title">${mob.name}</h2>
+        <img src="${mob.bild}" alt="Bild von ${mob.name}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; margin: 16px 0;" />
+        <p><strong>Typ:</strong> ${mob.typ}</p>
+        <p><strong>Lebenspunkte:</strong> ${mob.lebenspunkte}</p>
+        <p><strong>Spawnrate:</strong> ${mob.spawnrate}</p>
+        <p><strong>Beschreibung:</strong> ${mob.beschreibung}</p>
+      `;
+
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+      
+      // Focus auf das Modal setzen
+      const closeButton = modal.querySelector('.close');
+      closeButton.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+      
+      // Focus zurück auf das Element setzen, das das Modal geöffnet hat
+      document.activeElement.blur();
+    }
+
+    // Initiale Darstellung
+    updateMobList();
+  </script>
 </body>
 </html>
