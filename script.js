@@ -1,4 +1,4 @@
-// Globale Variablen
+// Globale Variablen 
 let allMobs = [];
 let currentGroupFilter = 'all';
 let currentSortKey = '';
