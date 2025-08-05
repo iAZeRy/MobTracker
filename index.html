@@ -2,64 +2,714 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Minecraft Mob Tracker - Verwalte und durchsuche Minecraft Mobs" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mob Tracker</title>
+  <style>
+    /* Modern Dark Theme */
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --bg-hover: #30363d;
+      --text-primary: #f0f6fc;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      --accent-primary: #58a6ff;
+      --accent-secondary: #7c3aed;
+      --accent-success: #238636;
+      --accent-warning: #d29922;
+      --accent-danger: #da3633;
+      --border-primary: #30363d;
+      --border-muted: #21262d;
+      --shadow-primary: rgba(1, 4, 9, 0.8);
+      --gradient-primary: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+      --gradient-accent: linear-gradient(135deg, #58a6ff 0%, #7c3aed 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 2rem;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(88, 166, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+    }
+
+    /* Header */
+    h1 {
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(88, 166, 255, 0.3);
+      position: relative;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--gradient-accent);
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
+    }
+
+    /* Controls Container */
+    #controls {
+      background: var(--bg-secondary);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-primary);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px var(--shadow-primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #controls::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient-accent);
+      opacity: 0.5;
+    }
+
+    /* Form Elements */
+    label {
+      display: inline-block;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    select {
+      background: var(--bg-tertiary);
+      border: 2px solid var(--border-primary);
+      border-radius: 12px;
+      color: var(--text-primary);
+      padding: 12px 16px;
+      font-size: 1rem;
+      margin-right: 2rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      min-width: 180px;
+    }
+
+    select:hover {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Search Field */
+    #mobSearch {
+      width: 100%;
+      max-width: 400px;
+      padding: 16px 24px;
+      border: 2px solid var(--border-primary);
+      border-radius: 50px;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      margin: 1.5rem 0;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    #mobSearch::placeholder {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    #mobSearch:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.2), 0 0 20px rgba(88, 166, 255, 0.1);
+      transform: scale(1.02);
+    }
+
+    /* Results Counter */
+    #results-count {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin: 1rem 0;
+      font-weight: 500;
+    }
+
+    /* Mob Groups */
+    .mob-group {
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .mob-group h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 2px solid var(--border-primary);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mob-group h2::before {
+      content: '📁';
+      font-size: 1.2em;
+    }
+
+    .mob-group h2::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--gradient-accent);
+      border-radius: 1px;
+    }
+
+    /* Mob Cards Container */
+    .mob-group-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Mob Cards */
+    .mob-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .mob-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .mob-card:hover::before {
+      left: 100%;
+    }
+
+    .mob-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--accent-primary);
+      box-shadow: 
+        0 20px 40px var(--shadow-primary),
+        0 0 0 1px rgba(88, 166, 255, 0.2),
+        0 0 20px rgba(88, 166, 255, 0.1);
+      background: var(--bg-hover);
+    }
+
+    .mob-card:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.2);
+    }
+
+    .mob-card:active {
+      transform: translateY(-4px) scale(0.98);
+    }
+
+    .mob-card img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      background: var(--bg-tertiary);
+      transition: transform 0.3s ease;
+    }
+
+    .mob-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .mob-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .mob-group-badge {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--bg-tertiary);
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 0.5rem;
+      border: 1px solid var(--border-muted);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      margin: 5% auto;
+      padding: 2.5rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      text-align: center;
+      color: var(--text-primary);
+      box-shadow: 0 20px 60px var(--shadow-primary);
+      animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      font-size: 1.8rem;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+    }
+
+    .close:hover {
+      background: rgba(218, 54, 51, 0.1);
+      color: var(--accent-danger);
+      transform: scale(1.1);
+    }
+
+    .modal-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin: 1rem 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border: 2px solid var(--border-primary);
+    }
+
+    .info-grid {
+      text-align: left;
+      margin: 1.5rem 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .info-item {
+      background: var(--bg-tertiary);
+      padding: 1rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent-primary);
+      transition: transform 0.2s ease;
+    }
+
+    .info-item:hover {
+      transform: translateX(4px);
+    }
+
+    .description {
+      text-align: left;
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      border-left: 4px solid var(--accent-secondary);
+    }
+
+    /* Status States */
+    .loading,
+    .no-results,
+    .error-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      margin: 2rem 0;
+      border: 1px solid var(--border-primary);
+    }
+
+    .loading::after {
+      content: "...";
+      animation: loadingDots 1.5s infinite;
+    }
+
+    @keyframes loadingDots {
+      0%, 20% { content: "."; }
+      40% { content: ".."; }
+      60%, 100% { content: "..."; }
+    }
+
+    .error-state h3 {
+      color: var(--accent-danger);
+      margin-bottom: 1rem;
+    }
+
+    .retry-btn {
+      background: var(--gradient-accent);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+    }
+
+    .retry-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(88, 166, 255, 0.4);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      #controls {
+        padding: 1.5rem;
+      }
+
+      select {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .mob-group-cards {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+      }
+
+      .modal-content {
+        margin: 10% auto;
+        padding: 2rem;
+        width: 95%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mob-group-cards {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-hover);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+
+    /* Selection */
+    ::selection {
+      background: rgba(88, 166, 255, 0.3);
+      color: var(--text-primary);
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>🧟 Mob Tracker</h1>
-    </header>
-
-    <main>
-      <!-- Modal für Mob-Informationen -->
-      <div id="infopanel-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-        <div class="modal-content">
-          <button class="close" onclick="closeModal()" aria-label="Schließen">&times;</button>
-          <div id="infotext" aria-live="polite"></div>
-        </div>
-      </div>
-
-      <!-- Filter- und Suchbereich -->
-      <section class="controls" aria-label="Filter und Suche">
-        <div class="filter-row">
-          <div class="form-group">
-            <label for="filterSelect">Gruppe:</label>
-            <select id="filterSelect" aria-describedby="filter-help">
-              <option value="all">Alle Gruppen</option>
-              <option value="Zombie">Zombie</option>
-              <option value="Skelett">Skelett</option>
-              <option value="Boss">Boss</option>
-              <option value="Tier">Tier</option>
-              <option value="Monster">Monster</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="sortSelect">Sortieren nach:</label>
-            <select id="sortSelect" aria-describedby="sort-help">
-              <option value="">Keine Sortierung</option>
-              <option value="name">Name (A–Z)</option>
-              <option value="lebenspunkte">Lebenspunkte</option>
-              <option value="spawnrate">Spawnrate</option>
-            </select>
-          </div>
-
-          <div class="form-group search-container">
-            <label for="mobSearch">Suche:</label>
-            <input type="text" id="mobSearch" placeholder="Mob suchen..." aria-describedby="search-help" />
-          </div>
-        </div>
-        
-        <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 10px;">
-          <span id="results-count">0 Mobs gefunden</span>
-        </div>
-      </section>
-
-      <!-- Mob-Liste -->
-      <section id="mobList" class="mob-grid" aria-label="Mob-Liste" role="grid"></section>
-    </main>
+  <h1>🧟 Mob Tracker</h1>
+  
+  <!-- MODAL INFOPANEL -->
+  <div id="infopanel-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="infotext"></div>
+    </div>
   </div>
+  
+  <!-- FILTER- UND SORTIERMENÜ -->
+  <div id="controls">
+    <label for="filterSelect">Gruppe:</label>
+    <select id="filterSelect">
+      <option value="all">🌍 Alle Gruppen</option>
+      <option value="Zombie">🧟 Zombie</option>
+      <option value="Skelett">💀 Skelett</option>
+      <option value="Boss">👑 Boss</option>
+      <option value="Monster">👹 Monster</option>
+      <option value="Tier">🐄 Tier</option>
+    </select>
+    
+    <label for="sortSelect">Sortieren nach:</label>
+    <select id="sortSelect">
+      <option value="">📝 Keine Sortierung</option>
+      <option value="name">🔤 Name (A–Z)</option>
+      <option value="lebenspunkte">❤️ Lebenspunkte</option>
+      <option value="spawnrate">📊 Spawnrate</option>
+    </select>
+  </div>
+  
+  <!-- Suchfeld -->
+  <input type="text" id="mobSearch" placeholder="🔍 Mob suchen..." />
+  
+  <!-- Results Counter -->
+  <div id="results-count">0 Mobs gefunden</div>
+  
+  <!-- Mobs anzeigen -->
+  <div id="mobList"></div>
+  
+  <script>
+    // Beispiel-Daten für Demo (ersetze das durch dein script.js)
+    const mobData = [
+      {
+        name: "Zombie",
+        group: "Monster",
+        lebenspunkte: "20",
+        spawnrate: "Häufig",
+        biom: "Oberworld",
+        image: "zombie.png",
+        description: "Ein untotes Monster, das nachts spawnt und Spieler angreift."
+      },
+      {
+        name: "Skelett",
+        group: "Monster", 
+        lebenspunkte: "20",
+        spawnrate: "Häufig",
+        biom: "Oberworld",
+        image: "skeleton.png",
+        description: "Ein Bogenschütze, der aus der Ferne angreift."
+      },
+      {
+        name: "Enderdrache",
+        group: "Boss",
+        lebenspunkte: "200",
+        spawnrate: "Einmalig",
+        biom: "End",
+        image: "enderdragon.png", 
+        description: "Der mächtigste Boss im End-Dimension."
+      }
+    ];
+
+    let allMobs = mobData;
+    let currentGroupFilter = 'all';
+    let currentSortKey = '';
+    let currentSearch = '';
+
+    // Vereinfachte Demo-Funktionen
+    function applyFilters() {
+      let filtered = [...allMobs];
+      
+      if (currentSearch) {
+        filtered = filtered.filter(mob =>
+          mob.name.toLowerCase().includes(currentSearch) ||
+          mob.group.toLowerCase().includes(currentSearch)
+        );
+      }
+      
+      if (currentGroupFilter !== 'all') {
+        filtered = filtered.filter(mob => mob.group === currentGroupFilter);
+      }
+      
+      if (currentSortKey === 'name') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      
+      renderGroups(groupMobs(filtered));
+      document.getElementById('results-count').textContent = `${filtered.length} Mobs gefunden`;
+    }
+
+    function groupMobs(mobs) {
+      const groups = {};
+      mobs.forEach(mob => {
+        if (!groups[mob.group]) groups[mob.group] = [];
+        groups[mob.group].push(mob);
+      });
+      return groups;
+    }
+
+    function renderGroups(groups) {
+      const mobList = document.getElementById('mobList');
+      mobList.innerHTML = '';
+      
+      for (const group in groups) {
+        const groupSection = document.createElement('section');
+        groupSection.className = 'mob-group';
+        groupSection.innerHTML = `<h2>${group} (${groups[group].length})</h2><div class="mob-group-cards"></div>`;
+        
+        const cardsContainer = groupSection.querySelector('.mob-group-cards');
+        groups[group].forEach(mob => {
+          const card = document.createElement('div');
+          card.className = 'mob-card';
+          card.innerHTML = `
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjMzMzIiByeD0iOCIvPgo8dGV4dCB4PSI0MCIgeT0iNDUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIj4ke21vYi5uYW1lWzBdfTwvdGV4dD4KPC9zdmc+" alt="${mob.name}">
+            <div class="mob-name">${mob.name}</div>
+            <div class="mob-group-badge">${mob.group}</div>
+          `;
+          card.addEventListener('click', () => showInfoPanel(mob));
+          cardsContainer.appendChild(card);
+        });
+        
+        mobList.appendChild(groupSection);
+      }
+    }
+
+    function showInfoPanel(mob) {
+      document.getElementById('infotext').innerHTML = `
+        <h2>${mob.name}</h2>
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjMzMzIiByeD0iMTIiLz4KPHRleHQgeD0iNjAiIHk9IjY1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTk5IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCI+JHttb2IubmFtZVswXX08L3RleHQ+Cjwvc3ZnPg==" class="modal-image" alt="${mob.name}">
+        <div class="info-grid">
+          <div class="info-item"><strong>Gruppe:</strong> ${mob.group}</div>
+          <div class="info-item"><strong>Lebenspunkte:</strong> ${mob.lebenspunkte}</div>
+          <div class="info-item"><strong>Spawnrate:</strong> ${mob.spawnrate}</div>
+          <div class="info-item"><strong>Biom:</strong> ${mob.biom}</div>
+        </div>
+        <div class="description">
+          <strong>Beschreibung:</strong>
+          <p>${mob.description}</p>
+        </div>
+      `;
+      document.getElementById('infopanel-modal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('infopanel-modal').style.display = 'none';
+    }
+
+    // Event Listeners
+    document.getElementById('filterSelect').addEventListener('change', e => {
+      currentGroupFilter = e.target.value;
+      applyFilters();
+    });
+
+    document.getElementById('sortSelect').addEventListener('change', e => {
+      currentSortKey = e.target.value;
+      applyFilters();
+    });
+
+    document.getElementById('mobSearch').addEventListener('input', e => {
+      currentSearch = e.target.value.toLowerCase();
+      applyFilters();
+    });
+
+    // Initial render
+    applyFilters();
+  </script>
 </body>
 </html>
